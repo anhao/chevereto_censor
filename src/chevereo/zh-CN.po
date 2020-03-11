@@ -1,0 +1,72 @@
+msgid "Image Censor"
+msgstr "图片审核"
+
+msgid "Bai Du Ai"
+msgstr "百度 AI "
+
+msgid "Tencent Ai"
+msgstr "腾讯 AI "
+
+msgid "Setting image censor interface"
+msgstr "设置图像审核接口"
+
+msgid "Pron image process mode"
+msgstr "色情图片处理方式"
+
+msgid "Suspect pron image process mode"
+msgstr "疑似色情图片处理方式"
+
+msgid "Censor fail image process mode"
+msgstr "审查失败图片处理方式"
+
+msgid "none mode"
+msgstr "不处理"
+
+msgid "del"
+msgstr "删除"
+
+msgid "make unhealthy"
+msgstr "标记不健康"
+
+msgid "Image violation"
+msgstr "图片违规"
+
+msgid "Image censor failed"
+msgstr "图片审查失败"
+
+msgid "BaiDu AI APPID"
+msgstr "百度 AI 平台 APP_ID"
+
+msgid "BaiDu AI APPID"
+msgstr "百度 AI 平台 APPID"
+
+msgid "BaiDu AI APPKEY"
+msgstr "百度 AI 平台 APPKEY"
+
+msgid "BaiDu AI APPSECRET"
+msgstr "百度 AI 平台 APPSECRET"
+
+msgid "BaiDu AI APPID,get Address: https://console.bce.baidu.com/ai/"
+msgstr "百度 AI 平台 APPID，申请地址 <a href='https://console.bce.baidu.com/ai/'>https://console.bce.baidu.com/ai/</a>"
+
+msgid "BaiDu AI APPKEY,get Address: https://console.bce.baidu.com/ai/"
+msgstr "百度 AI 平台 APPKEY，申请地址 <a href='https://console.bce.baidu.com/ai/'>https://console.bce.baidu.com/ai/</a>"
+
+msgid "BaiDu AI APPSECRET,get Address: https://console.bce.baidu.com/ai/"
+msgstr "百度 AI 平台 APPSECRET，申请地址 <a href='https://console.bce.baidu.com/ai/'>https://console.bce.baidu.com/ai/</a>"
+
+msgid "Tencent AI APPID"
+msgstr "腾讯 AI 平台 APPID"
+
+msgid "Tencent AI APPKEY"
+msgstr "腾讯 AI 平台 APPKEY"
+
+msgid "TenCent AI APPID get Address :https://ai.qq.com/"
+msgstr "腾讯 AI 平台 APPID 申请地址 : <a href='https://ai.qq.com/'>https://ai.qq.com/</a>"
+
+msgid "TenCent AI APPKEY get Address :https://ai.qq.com/"
+msgstr "腾讯 AI 平台 APPKEY 申请地址 : <a href='https://ai.qq.com/'>https://ai.qq.com/</a>"
+
+msgid "Moderatecontent Key,get Address : https://www.moderatecontent.com/"
+msgstr "Moderatecontent Key,申请地址 : https://www.moderatecontent.com/"
+
