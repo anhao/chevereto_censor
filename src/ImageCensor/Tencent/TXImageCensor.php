@@ -28,7 +28,7 @@ class TXImageCensor extends AipBase
         $data = [];
         $isUrl = substr(trim($image), 0, 4) === 'http';
         if (!$isUrl) {
-            $data['image'] = base64_encode(file_get_contents($image));
+            $data['image'] = base64_encode($image);
         } else {
             $data['image_url'] = $image;
         }

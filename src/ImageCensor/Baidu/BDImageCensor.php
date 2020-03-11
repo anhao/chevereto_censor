@@ -29,7 +29,7 @@ class BDImageCensor extends AipBase
 
         $isUrl = substr(trim($image), 0, 4) === 'http';
         if (!$isUrl) {
-            $data['image'] = base64_encode(file_get_contents($image));
+            $data['image'] = base64_encode($image);
         } else {
             $data['imgUrl'] = $image;
         }
