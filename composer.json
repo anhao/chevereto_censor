@@ -1,0 +1,22 @@
+{
+    "name": "alone88/chevereto_censor",
+    "description": "chevereto censor",
+    "type": "library",
+    "license": "Apache",
+    "authors": [
+        {
+            "name": "Alone88",
+            "email": "im@alone88.cn"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+      "ext-curl": "*",
+      "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Alone88\\ImageCensor\\"  : "src/ImageCensor"
+        }
+    }
+}
