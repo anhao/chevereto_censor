@@ -2,7 +2,7 @@
     "name": "alone88/chevereto_censor",
     "description": "chevereto censor",
     "type": "library",
-    "license": "Apache",
+    "license": "Apache-2.0",
     "authors": [
         {
             "name": "Alone88",
