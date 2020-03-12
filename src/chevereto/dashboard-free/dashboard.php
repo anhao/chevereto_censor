@@ -2371,7 +2371,7 @@
                         <div class="input-below"><?php _se('Suspect pron image process mode'); ?></div>
                     </div>
                     <div class="input-label">
-                        <label for="fail_mode"><?php _se('Suspect pron image process mode'); ?></label>
+                        <label for="fail_mode"><?php _se('Censor fail image process mode'); ?></label>
                         <div class="c5 phablet-c1"><select type="text" name="fail_mode" id="fail_mode" class="text-input">
                                 <?php
                                 echo CHV\Render\get_select_options_html([0 => _s('none mode'), 1 => _s('del'), 2 => _s('make unhealthy')], CHV\Settings::get('fail_mode')); ?>
