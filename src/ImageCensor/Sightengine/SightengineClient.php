@@ -3,11 +3,10 @@
  * Created by PhpStorm.
  * User: Administrator
  * Date: 2020/3/10
- * Time: 22:15
+ * Time: 22:15.
  */
 
 namespace Alone88\ImageCensor\Sightengine;
-
 
 use Alone88\ImageCensor\Tool\HttpUtil;
 
@@ -15,8 +14,8 @@ class SightengineClient
 {
     private $apiUser;
     private $apiSecret;
-    private $imageCensorUrl = "https://api.sightengine.com/1.0/check.json";
-    private $model = "nudity";
+    private $imageCensorUrl = 'https://api.sightengine.com/1.0/check.json';
+    private $model = 'nudity';
 
     public function __construct($apiUser = null, $apiSecret = null)
     {
@@ -25,10 +24,12 @@ class SightengineClient
         $this->client = new HttpUtil();
     }
 
-    /** check url
+    /** check url.
      * @param $url
-     * @return mixed
+     *
      * @throws \Exception
+     *
+     * @return mixed
      */
     public function url($url)
     {
@@ -37,12 +38,15 @@ class SightengineClient
         $data['api_secret'] = $this->apiSecret;
         $data['models'] = $this->model;
         $rep = $this->client->get($this->imageCensorUrl, $data);
+
         return $this->proccessResult($rep['content']);
     }
 
     /**
-     * 格式化结果
+     * 格式化结果.
+     *
      * @param $content string
+     *
      * @return mixed
      */
     protected function proccessResult($content)
@@ -50,8 +54,9 @@ class SightengineClient
         return json_decode($content, true);
     }
 
-    /** check file
+    /** check file.
      * @param $file
+     *
      * @throws \Exception
      */
     public function file($file)
@@ -61,7 +66,8 @@ class SightengineClient
         $data['models'] = $this->model;
         $data['media'] = $file;
         $rep = $this->client->postFile($this->imageCensorUrl, $data, 'media');
-        return $this->proccessResult($rep["content"]);
+
+        return $this->proccessResult($rep['content']);
     }
 
     /**

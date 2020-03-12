@@ -6,7 +6,7 @@ function read_the_docs($args = [])
 {
     return _s('Learn more about %s at our %d.', [
         '%s' => $args['%s'],
-        '%d' => '<a href="https://chevereto.com/docs/' . $args['%k'] . '" target="_blank">' . _s('documentation') . '</a>',
+        '%d' => '<a href="https://chevereto.com/docs/'.$args['%k'].'" target="_blank">'._s('documentation').'</a>',
     ]);
 }
 
@@ -29,17 +29,17 @@ function read_the_docs($args = [])
                     <span class="modal-box-title"><?php _se('Not your IP?'); ?></span>
                     <div class="connecting-ip"><?php echo G\get_client_ip(); ?></div>
                     <p><?php _se("The connecting IP is determined using the server variable %var%. If the detected IP doesn't match yours, it means that your web server is under a proxy and you need to tweak your server to set the real connecting IP.", ['%var%' => '<code class="code">$_SERVER[\'REMOTE_ADDR\']</code>']); ?></p>
-                    <p><?php _se("For Nginx, you must use %nginx%. For Apache, %apache%.", [
-                            '%nginx%' => '<code class="code">ngx_http_realip_module</code>',
-                            '%apache%' => '<code class="code">mod_remoteip</code>'
-                        ]); ?></p>
-                    <p><?php _se("Make sure that you address this issue as the system relies on accurate IP detections to provide basic functionalities and to protect against spam, flooding, and brute force attacks."); ?></p>
+                    <p><?php _se('For Nginx, you must use %nginx%. For Apache, %apache%.', [
+                        '%nginx%'  => '<code class="code">ngx_http_realip_module</code>',
+                        '%apache%' => '<code class="code">mod_remoteip</code>',
+                    ]); ?></p>
+                    <p><?php _se('Make sure that you address this issue as the system relies on accurate IP detections to provide basic functionalities and to protect against spam, flooding, and brute force attacks.'); ?></p>
                 </div>
                 <div class="dashboard-group">
                     <div class="overflow-auto text-align-center margin-top-20">
                         <a href="<?php echo G\get_base_url('dashboard/images'); ?>"
                            class="stats-block c6 fluid-column display-inline-block" <?php if (get_totals()['images'] > 999999) {
-                            echo ' rel="tooltip" data-tipTip="top" title="' . number_format(get_totals()['images']) . '"';
+                            echo ' rel="tooltip" data-tipTip="top" title="'.number_format(get_totals()['images']).'"';
                         } ?>>
 							<span class="stats-big-number">
 								<strong class="number"><?php echo get_totals()['images'] > 999999 ? get_totals_display()['images'] : number_format(get_totals()['images']); ?></strong>
@@ -48,7 +48,7 @@ function read_the_docs($args = [])
                         </a>
                         <a href="<?php echo G\get_base_url('dashboard/albums'); ?>"
                            class="stats-block c6 fluid-column display-inline-block" <?php if (get_totals()['albums'] > 999999) {
-                            echo ' rel="tooltip" data-tipTip="top" title="' . number_format(get_totals()['albums']) . '"';
+                            echo ' rel="tooltip" data-tipTip="top" title="'.number_format(get_totals()['albums']).'"';
                         } ?>>
 							<span class="stats-big-number">
 								<strong class="number"><?php echo get_totals()['albums'] > 999999 ? get_totals_display()['albums'] : number_format(get_totals()['albums']); ?></strong>
@@ -57,7 +57,7 @@ function read_the_docs($args = [])
                         </a>
                         <a href="<?php echo G\get_base_url('dashboard/users'); ?>"
                            class="stats-block c6 fluid-column display-inline-block" <?php if (get_totals()['users'] > 999999) {
-                            echo ' rel="tooltip" data-tipTip="top" title="' . number_format(get_totals()['users']) . '"';
+                            echo ' rel="tooltip" data-tipTip="top" title="'.number_format(get_totals()['users']).'"';
                         } ?>>
 							<span class="stats-big-number">
 								<strong class="number"><?php echo get_totals()['users'] > 999999 ? get_totals_display()['users'] : number_format(get_totals()['users']); ?></strong>
@@ -100,7 +100,7 @@ function read_the_docs($args = [])
                         </div>
                     </div>
                 </div>
-                <p><?php _se('This tool allows to mass add content to your website by pointing a system path with the content you want to import. It supports the addition of users, albums, and images using a folder based structure. You can learn more about the folder structure, adding metadata, and all about this tool in our %d.', ['%d' => '<a href="https://goo.gl/q5poeY">' . _s('documentation') . '</a>']); ?></p>
+                <p><?php _se('This tool allows to mass add content to your website by pointing a system path with the content you want to import. It supports the addition of users, albums, and images using a folder based structure. You can learn more about the folder structure, adding metadata, and all about this tool in our %d.', ['%d' => '<a href="https://goo.gl/q5poeY">'._s('documentation').'</a>']); ?></p>
                 <div data-modal="modal-add-import" class="hidden" data-submit-fn="CHV.fn.import.add.submit"
                      data-ajax-deferred="CHV.fn.import.add.deferred">
                     <span class="modal-box-title"><?php _se('Add import job'); ?></span>
@@ -134,29 +134,29 @@ function read_the_docs($args = [])
             }
             $importTpl = '<li data-status="%status%" data-id="%id%" data-object="%object%" data-errors="%errors%" data-started="%started%">
 			<span class="fluid-column c2 col-2-max display-table-cell padding-right-10">%id%</span>
-			<span class="fluid-column c2 col-2-max display-table-cell padding-right-10 text-transform-uppercase" title="' . _s('Top level folders as %s', '%parse%') . '">%shortParse%</span>
+			<span class="fluid-column c2 col-2-max display-table-cell padding-right-10 text-transform-uppercase" title="'._s('Top level folders as %s', '%parse%').'">%shortParse%</span>
 			<span class="fluid-column c3 col-3-max display-table-cell padding-right-10">
 				<span class="icon icon-warning2 color-red" data-result="error"></span>
 				<span class="icon icon-checkmark-circle color-green" data-result="success"></span>
 				<span class="status-text">%displayStatus%</span>
 			</span>
 			<span class="fluid-column c7 col-7-max col-7-min display-table-cell padding-right-10 text-overflow-ellipsis phone-display-block" title="%path%">%path%</span>
-			<span class="fluid-column c2 display-table-cell padding-right-10"><span>%users%</span><span class="table-li--mobile-display"> ' . _s('Users') . '</span></span>
-			<span class="fluid-column c2 display-table-cell padding-right-10"><span>%albums%</span><span class="table-li--mobile-display"> ' . _s('Albums') . '</span></span>
-			<span class="fluid-column c3 display-table-cell padding-right-10"><span>%images%</span><span class="table-li--mobile-display"> ' . _s('Images') . '</span></span>
+			<span class="fluid-column c2 display-table-cell padding-right-10"><span>%users%</span><span class="table-li--mobile-display"> '._s('Users').'</span></span>
+			<span class="fluid-column c2 display-table-cell padding-right-10"><span>%albums%</span><span class="table-li--mobile-display"> '._s('Albums').'</span></span>
+			<span class="fluid-column c3 display-table-cell padding-right-10"><span>%images%</span><span class="table-li--mobile-display"> '._s('Images').'</span></span>
 			<div class="fluid-column c3 display-table-cell margin-bottom-0 phone-display-block">
 				<div class="loading"></div>
 				<div data-content="pop-selection" class="pop-btn">
-					<span class="pop-btn-text">' . _s('Actions') . '<span class="arrow-down"></span></span>
+					<span class="pop-btn-text">'._s('Actions').'<span class="arrow-down"></span></span>
 					<div class="pop-box arrow-box arrow-box-top anchor-left">
 						<div class="pop-box-inner pop-box-menu">
 							<ul>
-								<li data-action="process" data-args="%id%"><a>' . _s('Process') . '</a></li>
-								<li data-action="pause"><a>' . _s('Pause') . '</a></li>
-								<li data-action="cancel"><a>' . _s('Cancel') . '</a></li>
-								<li data-content="log-process"><a href="' . G\get_base_url('importer-jobs/%id%/process') . '" target="_blank">' . _s('Process log') . '</a></li>
-								<li data-content="log-errors"><a href="' . G\get_base_url('importer-jobs/%id%/errors') . '" target="_blank">' . _s('Errors') . '</a></li>
-								<li data-args="%id%" data-confirm="' . _s('Do you really want to remove the import ID %s?', '%id%') . '" data-submit-fn="CHV.fn.import.delete.submit" data-ajax-deferred="CHV.fn.import.delete.deferred"><a>' . _s('Delete') . '</a></li>
+								<li data-action="process" data-args="%id%"><a>'._s('Process').'</a></li>
+								<li data-action="pause"><a>'._s('Pause').'</a></li>
+								<li data-action="cancel"><a>'._s('Cancel').'</a></li>
+								<li data-content="log-process"><a href="'.G\get_base_url('importer-jobs/%id%/process').'" target="_blank">'._s('Process log').'</a></li>
+								<li data-content="log-errors"><a href="'.G\get_base_url('importer-jobs/%id%/errors').'" target="_blank">'._s('Errors').'</a></li>
+								<li data-args="%id%" data-confirm="'._s('Do you really want to remove the import ID %s?', '%id%').'" data-submit-fn="CHV.fn.import.delete.submit" data-ajax-deferred="CHV.fn.import.delete.deferred"><a>'._s('Delete').'</a></li>
 							</ul>
 						</div>
 					</div>
@@ -164,17 +164,17 @@ function read_the_docs($args = [])
 			</div>
 		</li>';
             $statusesDisplay = [
-                'queued' => _s('Queued'),
-                'working' => _s('Working'),
-                'paused' => _s('Paused'),
-                'canceled' => _s('Canceled'),
+                'queued'    => _s('Queued'),
+                'working'   => _s('Working'),
+                'paused'    => _s('Paused'),
+                'canceled'  => _s('Canceled'),
                 'completed' => _s('Completed'),
             ];
             ?>
                 <ul data-content="dashboard-imports"
                     class="tabbed-content-list table-li-hover table-li margin-top-20 margin-bottom-20<?php if (is_array($imports) == false) {
-                        echo ' hidden';
-                    } ?>">
+                echo ' hidden';
+            } ?>">
                     <li class="table-li-header phone-hide">
                         <span class="fluid-column c2 display-table-cell">ID</span>
                         <span class="fluid-column c2 display-table-cell"><?php _se('Parser'); ?></span>
@@ -189,18 +189,18 @@ function read_the_docs($args = [])
                     if (is_array($imports)) {
                         foreach ($imports as $k => $v) {
                             echo strtr($importTpl, [
-                                '%id%' => $v['id'],
-                                '%object%' => htmlspecialchars(json_encode($v), ENT_QUOTES, 'UTF-8'),
-                                '%status%' => $v['status'],
-                                '%parse%' => $v['options']['root'],
-                                '%shortParse%' => $v['options']['root'][0],
+                                '%id%'            => $v['id'],
+                                '%object%'        => htmlspecialchars(json_encode($v), ENT_QUOTES, 'UTF-8'),
+                                '%status%'        => $v['status'],
+                                '%parse%'         => $v['options']['root'],
+                                '%shortParse%'    => $v['options']['root'][0],
                                 '%displayStatus%' => $statusesDisplay[$v['status']],
-                                '%path%' => $v['path'],
-                                '%users%' => $v['users'] ?: 0,
-                                '%images%' => $v['images'] ?: 0,
-                                '%albums%' => $v['albums'] ?: 0,
-                                '%errors%' => $v['errors'] ?: 0,
-                                '%started%' => $v['started'] ?: 0,
+                                '%path%'          => $v['path'],
+                                '%users%'         => $v['users'] ?: 0,
+                                '%images%'        => $v['images'] ?: 0,
+                                '%albums%'        => $v['albums'] ?: 0,
+                                '%errors%'        => $v['errors'] ?: 0,
+                                '%started%'       => $v['started'] ?: 0,
                             ]);
                         }
                     }
@@ -569,7 +569,7 @@ function read_the_docs($args = [])
             function personal_mode_warning()
             {
                 if (CHV\getSetting('website_mode') == 'personal') {
-                    echo '<div class="input-below"><span class="icon icon-info color-red"></span> ' . _s('This setting is always diabled when using personal website mode.') . '</div>';
+                    echo '<div class="input-below"><span class="icon icon-info color-red"></span> '._s('This setting is always diabled when using personal website mode.').'</div>';
                 }
             }
 
@@ -607,7 +607,7 @@ function read_the_docs($args = [])
                             </div>
                         </div>
                         <?php if (get_settings()['key'] == 'categories') {
-                            ?>
+                                            ?>
                             <div class="header-content-right phone-float-none">
                                 <div class="list-selection header--centering">
                                     <a class="header-link" data-modal="form"
@@ -623,9 +623,9 @@ function read_the_docs($args = [])
                                 </div>
                             </div>
                             <?php
-                        } ?>
+                                        } ?>
                         <?php if (get_settings()['key'] == 'ip-bans') {
-                            ?>
+                                            ?>
                             <div class="header-content-right phone-float-none">
                                 <div class="list-selection header--centering">
                                     <a class="header-link" data-modal="form"
@@ -641,9 +641,9 @@ function read_the_docs($args = [])
                                 </div>
                             </div>
                             <?php
-                        } ?>
+                                        } ?>
                         <?php if (get_settings()['key'] == 'external-storage') {
-                            ?>
+                                            ?>
                             <div class="header-content-right phone-float-none">
                                 <div class="list-selection header--centering">
                                     <a class="header-link" data-modal="form"
@@ -659,7 +659,7 @@ function read_the_docs($args = [])
                                 </div>
                             </div>
                             <?php
-                        } ?>
+                                        } ?>
                         <?php
                         if (get_settings()['key'] == 'pages') {
                             switch (get_settings_pages()['doing']) {
@@ -692,7 +692,7 @@ function read_the_docs($args = [])
                         ?>
 
                         <?php if (get_settings()['key'] == 'website') {
-                        ?>
+                            ?>
 
                         <div class="phablet-c1">
                             <div class="input-label">
@@ -725,7 +725,7 @@ function read_the_docs($args = [])
                                         <?php
                                         echo CHV\Render\get_select_options_html([1 => _s('Enabled'), 0 => _s('Disabled')], CHV\Settings::get('enable_powered_by')); ?>
                                     </select></div>
-                                <div class="input-below"><?php _se('Enable this if you want to show a "%s" link at the footer.', _s('Powered by') . ' Chevereto'); ?></div>
+                                <div class="input-below"><?php _se('Enable this if you want to show a "%s" link at the footer.', _s('Powered by').' Chevereto'); ?></div>
                             </div>
                         </div>
 
@@ -739,7 +739,7 @@ function read_the_docs($args = [])
                                         <?php
                                         echo CHV\Render\get_select_options_html(['auto' => _s('Automatic'), 'forced' => _s('Forced'), 'disabled' => _s('Disabled')], CHV\Settings::get('website_https')); ?>
                                     </select></div>
-                                <div class="input-below"><?php _se("%a will use HTTPS detection on the server side (recommended). %f will use HTTPS regardless of your server setup. %d to don't use HTTPS at all.", ['%a' => '"' . _s('Automatic') . '"', '%f' => '"' . _s('Forced') . '"', '%d' => '"' . _s('Disabled') . '"']); ?></div>
+                                <div class="input-below"><?php _se("%a will use HTTPS detection on the server side (recommended). %f will use HTTPS regardless of your server setup. %d to don't use HTTPS at all.", ['%a' => '"'._s('Automatic').'"', '%f' => '"'._s('Forced').'"', '%d' => '"'._s('Disabled').'"']); ?></div>
                                 <div class="input-below"><span
                                             class="highlight"><?php _se("This only controls the protocol used in the URLs, it won't turn your website into a valid HTTPS website unless your server is configured to support and use HTTPS."); ?></span>
                                 </div>
@@ -750,12 +750,12 @@ function read_the_docs($args = [])
 
                         <?php
                         $zones = timezone_identifiers_list();
-                        foreach ($zones as $tz) {
-                            $zone = explode('/', $tz);
-                            $subzone = $zone;
-                            array_shift($subzone);
-                            $regions[$zone[0]][$tz] = join('/', $subzone);
-                        } ?>
+                            foreach ($zones as $tz) {
+                                $zone = explode('/', $tz);
+                                $subzone = $zone;
+                                array_shift($subzone);
+                                $regions[$zone[0]][$tz] = implode('/', $subzone);
+                            } ?>
 
                         <div class="input-label">
                             <label for="timezone-region"><?php _se('Default time zone'); ?></label>
@@ -765,10 +765,10 @@ function read_the_docs($args = [])
                                         <option><?php _se('Select region'); ?></option>
                                         <?php
                                         $default_timezone = explode('/', CHV\Settings::get('default_timezone'));
-                                        foreach ($regions as $key => $region) {
-                                            $selected = $default_timezone[0] == $key ? ' selected' : '';
-                                            echo '<option value="' . $key . '"' . $selected . '>' . $key . '</option>';
-                                        } ?>
+                            foreach ($regions as $key => $region) {
+                                $selected = $default_timezone[0] == $key ? ' selected' : '';
+                                echo '<option value="'.$key.'"'.$selected.'>'.$key.'</option>';
+                            } ?>
                                     </select>
                                 </div>
                                 <div id="timezone-combo" class="c5 phablet-c1 grid-columns">
@@ -784,7 +784,7 @@ function read_the_docs($args = [])
                                             <?php
                                             foreach ($region as $k => $l) {
                                                 $selected = CHV\Settings::get('default_timezone') == $k ? ' selected' : '';
-                                                echo '<option value="' . $k . '"' . $selected . '>' . $l . '</option>' . "\n";
+                                                echo '<option value="'.$k.'"'.$selected.'>'.$l.'</option>'."\n";
                                             } ?>
                                         </select>
                                         <?php
@@ -822,8 +822,8 @@ function read_the_docs($args = [])
                         <div id="website-explore-combo">
                             <div data-combo-value="1"
                                  class="switch-combo phablet-c1<?php if ((get_safe_post() ? get_safe_post()['website_explore_page'] : CHV\Settings::get('website_explore_page')) != 1) {
-                                     echo ' soft-hidden';
-                                 } ?>">
+                                        echo ' soft-hidden';
+                                    } ?>">
                                 <div class="input-label">
                                     <label for="website_explore_page_guest"><?php _se('Explore'); ?>
                                         (<?php _se('guests'); ?>)</label>
@@ -852,8 +852,8 @@ function read_the_docs($args = [])
                             <label for="enable_likes"><?php _se('Likes'); ?></label>
                             <div class="c5 phablet-c1"><select type="text" name="enable_likes" id="enable_likes"
                                                                class="text-input" <?php if (CHV\getSetting('website_mode') == 'personal') {
-                                    echo ' disabled';
-                                } ?>>
+                                        echo ' disabled';
+                                    } ?>>
                                     <?php
                                     echo CHV\Render\get_select_options_html([1 => _s('Enabled'), 0 => _s('Disabled')], CHV\Settings::get('enable_likes')); ?>
                                 </select></div>
@@ -865,8 +865,8 @@ function read_the_docs($args = [])
                             <label for="enable_followers"><?php _se('Followers'); ?></label>
                             <div class="c5 phablet-c1"><select type="text" name="enable_followers" id="enable_followers"
                                                                class="text-input" <?php if (CHV\getSetting('website_mode') == 'personal') {
-                                    echo ' disabled';
-                                } ?>>
+                                        echo ' disabled';
+                                    } ?>>
                                     <?php
                                     echo CHV\Render\get_select_options_html([1 => _s('Enabled'), 0 => _s('Disabled')], CHV\Settings::get('enable_followers')); ?>
                                 </select></div>
@@ -891,8 +891,8 @@ function read_the_docs($args = [])
 
                             <div data-combo-value="personal"
                                  class="switch-combo phablet-c1<?php if ((get_safe_post() ? get_safe_post()['website_mode'] : CHV\Settings::get('website_mode')) != 'personal') {
-                                     echo ' soft-hidden';
-                                 } ?>">
+                                        echo ' soft-hidden';
+                                    } ?>">
 
                                 <hr class="line-separator">
 
@@ -938,8 +938,8 @@ function read_the_docs($args = [])
                         <div id="website-privacy-mode-combo">
                             <div data-combo-value="private"
                                  class="switch-combo phablet-c1<?php if ((get_safe_post() ? get_safe_post()['website_privacy_mode'] : CHV\Settings::get('website_privacy_mode')) != 'private') {
-                                     echo ' soft-hidden';
-                                 } ?>">
+                                        echo ' soft-hidden';
+                                    } ?>">
                                 <div class="input-label">
                                     <label for="website_content_privacy_mode"><?php _se('Content privacy mode'); ?></label>
                                     <div class="c5 phablet-c1"><select type="text" name="website_content_privacy_mode"
@@ -947,8 +947,8 @@ function read_the_docs($args = [])
                                                                        class="text-input">
                                             <?php
                                             echo CHV\Render\get_select_options_html([
-                                                'default' => _s('Default'),
-                                                'private' => _s('Force private (self)'),
+                                                'default'          => _s('Default'),
+                                                'private'          => _s('Force private (self)'),
                                                 'private_but_link' => _s('Force private (anyone with the link)'),
                                             ], CHV\Settings::get('website_content_privacy_mode')); ?>
                                         </select></div>
@@ -959,13 +959,13 @@ function read_the_docs($args = [])
                         </div>
 
                     <?php
-                    } ?>
+                        } ?>
 
                     <?php
                     if (get_settings()['key'] == 'pages') {
-                    // So ugly!
+                        // So ugly!
 
-                    switch (get_settings_pages()['doing']) {
+                        switch (get_settings_pages()['doing']) {
                         case 'display':
                             break;
                         case 'add':
@@ -977,22 +977,22 @@ function read_the_docs($args = [])
                             global $page_db;
                             $page_db = [];
                             foreach ($page as $k => $v) {
-                                $page_db['page_' . $k] = $v;
+                                $page_db['page_'.$k] = $v;
                             }
 
                             break;
                     }
 
-                    function get_page_val($key, $from = 'POST')
-                    {
-                        global $page_db;
-                        if (empty($key)) {
-                            return null;
-                        }
-                        if ($from == 'POST' and $_POST) {
-                            return get_safe_post()[$key];
-                        } else {
-                            switch (get_settings_pages()['doing']) {
+                        function get_page_val($key, $from = 'POST')
+                        {
+                            global $page_db;
+                            if (empty($key)) {
+                                return null;
+                            }
+                            if ($from == 'POST' and $_POST) {
+                                return get_safe_post()[$key];
+                            } else {
+                                switch (get_settings_pages()['doing']) {
                                 case 'add':
                                     return null;
                                     break;
@@ -1000,16 +1000,16 @@ function read_the_docs($args = [])
                                     return array_key_exists($key, $page_db) ? $page_db[$key] : null;
                                     break;
                             }
-                        }
-                    } ?>
+                            }
+                        } ?>
                     <?php if (get_settings_pages()['title']) {
-                    ?>
+                            ?>
                         <h3><?php echo get_settings_pages()['title']; ?></h3>
                         <?php
-                    } ?>
+                        } ?>
 
                         <?php if (get_settings_pages()['doing'] !== 'listing') {
-                        ?>
+                            ?>
 
                         <div class="input-label">
                             <label for="page_title"><?php _se('Title'); ?></label>
@@ -1025,7 +1025,7 @@ function read_the_docs($args = [])
                             <div class="c5 phablet-c1"><select type="text" name="page_is_active" id="page_is_active"
                                                                class="text-input">
                                     <?php
-                                    echo CHV\Render\get_select_options_html([1 => _s('Active page'), 0 => _s('Inactive page (%s)', '404')], (int)get_page_val('page_is_active')); ?>
+                                    echo CHV\Render\get_select_options_html([1 => _s('Active page'), 0 => _s('Inactive page (%s)', '404')], (int) get_page_val('page_is_active')); ?>
                                 </select></div>
                             <div class="input-below input-warning red-warning"><?php echo get_input_errors()['page_is_active']; ?></div>
                             <div class="input-below"><?php _se('Only active pages will be accessible.'); ?></div>
@@ -1047,7 +1047,7 @@ function read_the_docs($args = [])
 
                             $pagesAll = CHV\Page::getAll();
                             $internals = [
-                                'tos' => _s('Terms of service'),
+                                'tos'     => _s('Terms of service'),
                                 'privacy' => _s('Privacy'),
                                 'contact' => _s('Contact'),
                             ];
@@ -1073,8 +1073,8 @@ function read_the_docs($args = [])
                             $page_internal_combo_visible = get_settings_pages()['doing'] == 'edit' ? (get_page_val('page_type') == 'internal') : true; ?>
                             <div data-combo-value="internal"
                                  class="switch-combo phablet-c1<?php if (!$page_internal_combo_visible) {
-                                     echo ' soft-hidden';
-                                 } ?>">
+                                echo ' soft-hidden';
+                            } ?>">
 
                                 <div class="input-label">
                                     <label for="page_internal"><?php _se('Internal page type'); ?></label>
@@ -1093,7 +1093,7 @@ function read_the_docs($args = [])
                                                                        id="page_is_link_visible"
                                                                        class="text-input" <?php echo $page_internal_combo_visible ? 'required' : 'data-required'; ?>>
                                             <?php
-                                            echo CHV\Render\get_select_options_html([1 => _s('Visible page'), 0 => _s('Hidden page')], (int)get_page_val('page_is_link_visible')); ?>
+                                            echo CHV\Render\get_select_options_html([1 => _s('Visible page'), 0 => _s('Hidden page')], (int) get_page_val('page_is_link_visible')); ?>
                                         </select></div>
                                     <div class="input-below input-warning red-warning"><?php echo get_input_errors()['page_is_link_visible']; ?></div>
                                     <div class="input-below"><?php _se("Hidden pages won't be show in system menus, but anyone can access to it with the link."); ?></div>
@@ -1124,7 +1124,7 @@ function read_the_docs($args = [])
                                     <div class="input-below input-warning red-warning"><?php echo get_input_errors()['page_file_path']; ?></div>
                                     <div class="input-below"><?php
                                         $pages_visible_path = G\absolute_to_relative(CHV_PATH_CONTENT_PAGES);
-                                        _se('A %f file relative to %s', ['%f' => G\get_app_setting('disable_php_pages') ? 'HTML' : 'PHP', '%s' => $pages_visible_path]); ?></div>
+                            _se('A %f file relative to %s', ['%f' => G\get_app_setting('disable_php_pages') ? 'HTML' : 'PHP', '%s' => $pages_visible_path]); ?></div>
                                 </div>
 
                                 <div class="input-label">
@@ -1160,23 +1160,23 @@ function read_the_docs($args = [])
                                         }
                                         $no_write_msg = _s('No write permission in %s you will need to edit the contents of this file using an external editor.', $page_write_path);
                                     }
-                                    $is_page_writable = is_writable($page_write_path);
-                                    $page_path = get_page_val('page_file_path', 'DB');
-                                    $page_path_absolute = get_page_val('page_file_path_absolute', 'DB'); ?>
+                            $is_page_writable = is_writable($page_write_path);
+                            $page_path = get_page_val('page_file_path', 'DB');
+                            $page_path_absolute = get_page_val('page_file_path_absolute', 'DB'); ?>
                                     <?php if ($page_path_absolute) {
-                                        ?>
+                                ?>
                                         <p class="margin-bottom-10"><?php echo G\absolute_to_relative($page_path ? $page_path_absolute : _s('Taken from: %s', $page_path_absolute)); ?></p>
                                         <?php
-                                    } ?>
+                            } ?>
                                     <?php if (!$is_page_writable) {
-                                        ?>
+                                ?>
                                         <p class="highlight margin-bottom-10 padding-5"><?php echo $no_write_msg; ?></p>
                                         <?php
-                                    } ?>
+                            } ?>
                                     <textarea type="text" name="page_code" id="page_code"
                                               class="text-input resize-vertical r14" <?php if (!$is_page_writable) {
-                                        echo ' readonly';
-                                    } ?>><?php echo (is_readable($page_path_absolute)) ? htmlspecialchars(file_get_contents($page_path_absolute)) : null; ?></textarea>
+                                echo ' readonly';
+                            } ?>><?php echo (is_readable($page_path_absolute)) ? htmlspecialchars(file_get_contents($page_path_absolute)) : null; ?></textarea>
                                     <div class="input-below input-warning red-warning"><?php echo get_input_errors()['page_code']; ?></div>
 
                                 </div>
@@ -1185,8 +1185,8 @@ function read_the_docs($args = [])
 
                             <div data-combo-value="link"
                                  class="switch-combo phablet-c1<?php if (get_page_val('page_type') !== 'link') {
-                                     echo ' soft-hidden';
-                                 } ?>">
+                                echo ' soft-hidden';
+                            } ?>">
                                 <div class="input-label">
                                     <label for="page_link_url"><?php _se('Link URL'); ?></label>
                                     <div class="c9 phablet-c1"><input type="url" name="page_link_url" id="page_link_url"
@@ -1248,9 +1248,9 @@ function read_the_docs($args = [])
                         </div>
 
                         <?php
-                    } else { // display
-                    if (get_pages() and count(get_pages()) > 0) {
-                        $auth_token = G\Handler::getAuthToken(); ?>
+                        } else { // display
+                            if (get_pages() and count(get_pages()) > 0) {
+                                $auth_token = G\Handler::getAuthToken(); ?>
                         <p><?php echo read_the_docs(['%s' => _s('pages'), '%k' => 'pages']); ?></p>
                         <ul data-content="dashboard-categories-list"
                             class="tabbed-content-list table-li-hover table-li margin-top-20 margin-bottom-20">
@@ -1268,9 +1268,9 @@ function read_the_docs($args = [])
                                     <span class="c3 display-table-cell padding-right-10 phone-hide"><?php echo $v['type_tr']; ?></span>
                                     <span class="c5 display-table-cell padding-right-10"><?php echo $v['url_key'] ? G\truncate($v['url_key'], 25) : '--'; ?></span>
                                     <span class="c13 display-table-cell padding-right-10 phablet-hide"><a
-                                                href="<?php echo G\get_base_url('dashboard/settings/pages/edit/' . $v['id']); ?>"><?php echo G\truncate($v['title'], 64); ?></a></span>
+                                                href="<?php echo G\get_base_url('dashboard/settings/pages/edit/'.$v['id']); ?>"><?php echo G\truncate($v['title'], 64); ?></a></span>
                                     <span class="c2 display-table-cell"><a class="delete-link"
-                                                                           href="<?php echo G\get_base_url('dashboard/settings/pages/delete/' . $v['id'] . '/?auth_token=' . $auth_token); ?>"
+                                                                           href="<?php echo G\get_base_url('dashboard/settings/pages/delete/'.$v['id'].'/?auth_token='.$auth_token); ?>"
                                                                            data-confirm="<?php _se("Do you really want to delete the page ID %s? This can't be undone.", $v['id']); ?>"><?php _se('Delete'); ?></a></span>
                                 </li>
                                 <?php
@@ -1278,7 +1278,7 @@ function read_the_docs($args = [])
                             ?>
                         </ul>
                         <?php
-                    } else { // no pages
+                            } else { // no pages
                         ?>
                         <div class="content-empty">
                             <span class="icon icon-drawer"></span>
@@ -1288,7 +1288,7 @@ function read_the_docs($args = [])
                     } ?>
 
                     <?php
-                    } // display
+                        } // display
                     ?>
 
                     <?php
@@ -1296,14 +1296,14 @@ function read_the_docs($args = [])
                     ?>
 
                     <?php if (get_settings()['key'] == 'image-upload') {
-                    ?>
+                        ?>
                         <div class="input-label">
                             <label><?php _se('Enabled image formats'); ?></label>
                             <div class="checkbox-label">
                                 <ul class="c20 phablet-c1">
                                     <?php
                                     foreach (CHV\Upload::getAvailableImageFormats() as $k) {
-                                        echo '<li class="c5 display-inline-block margin-right-10"><label class="display-block" for="image_format_enable[' . $k . ']"> <input type="checkbox" name="image_format_enable[]" id="image_format_enable[' . $k . ']" value="' . $k . '"' . (in_array($k, CHV\Upload::getEnabledImageFormats()) ? ' checked' : null) . '>' . strtoupper($k) . '</label></li>';
+                                        echo '<li class="c5 display-inline-block margin-right-10"><label class="display-block" for="image_format_enable['.$k.']"> <input type="checkbox" name="image_format_enable[]" id="image_format_enable['.$k.']" value="'.$k.'"'.(in_array($k, CHV\Upload::getEnabledImageFormats()) ? ' checked' : null).'>'.strtoupper($k).'</label></li>';
                                     } ?>
                                 </ul>
                                 <div class="input-below input-warning red-warning"><?php echo get_input_errors()['upload_enabled_image_formats']; ?></div>
@@ -1326,8 +1326,8 @@ function read_the_docs($args = [])
                             <label for="guest_uploads"><?php _se('Guest uploads'); ?></label>
                             <div class="c5 phablet-c1"><select type="text" name="guest_uploads" id="guest_uploads"
                                                                class="text-input" <?php if (CHV\getSetting('website_mode') == 'personal') {
-                                    echo ' disabled';
-                                } ?>>
+                                        echo ' disabled';
+                                    } ?>>
                                     <?php
                                     echo CHV\Render\get_select_options_html([1 => _s('Enabled'), 0 => _s('Disabled')], CHV\Settings::get('guest_uploads')); ?>
                                 </select></div>
@@ -1340,7 +1340,7 @@ function read_the_docs($args = [])
                             <div class="c5 phablet-c1"><select type="text" name="upload_gui" id="upload_gui"
                                                                class="text-input">
                                     <?php
-                                    echo CHV\Render\get_select_options_html(['js' => _s('On-page container'), 'page' => '/upload ' . _s('route')], CHV\Settings::get('upload_gui')); ?>
+                                    echo CHV\Render\get_select_options_html(['js' => _s('On-page container'), 'page' => '/upload '._s('route')], CHV\Settings::get('upload_gui')); ?>
                                 </select></div>
                         </div>
 
@@ -1476,7 +1476,7 @@ function read_the_docs($args = [])
                                                    value="<?php echo get_safe_post() ? get_safe_post()['upload_max_filesize_mb'] : CHV\Settings::get('upload_max_filesize_mb'); ?>"
                                                    placeholder="MB" required></div>
                             <div class="input-below input-warning red-warning"><?php echo get_input_errors()['upload_max_filesize_mb']; ?></div>
-                            <div class="input-below"><?php _se('Maximum size allowed by server is %s. This limit is capped by %u and %p (%f values).', ['%s' => G\format_bytes(CHV\Settings::get('true_upload_max_filesize')), '%u' => '<code>upload_max_filesize = ' . ini_get('upload_max_filesize') . '</code>', '%p' => '<code>post_max_size = ' . ini_get('post_max_size') . '</code>', '%f' => 'php.ini']); ?></div>
+                            <div class="input-below"><?php _se('Maximum size allowed by server is %s. This limit is capped by %u and %p (%f values).', ['%s' => G\format_bytes(CHV\Settings::get('true_upload_max_filesize')), '%u' => '<code>upload_max_filesize = '.ini_get('upload_max_filesize').'</code>', '%p' => '<code>post_max_size = '.ini_get('post_max_size').'</code>', '%f' => 'php.ini']); ?></div>
                         </div>
 
                         <div class="input-label">
@@ -1585,8 +1585,8 @@ function read_the_docs($args = [])
                         <div id="watermark-combo">
                             <div data-combo-value="1"
                                  class="switch-combo phablet-c1<?php if ((get_safe_post() ? get_safe_post()['watermark_enable'] : CHV\Settings::get('watermark_enable')) != 1) {
-                                     echo ' soft-hidden';
-                                 } ?>">
+                                        echo ' soft-hidden';
+                                    } ?>">
                                 <?php
                                 if (!is_writable(CHV_PATH_CONTENT_IMAGES_SYSTEM)) {
                                     ?>
@@ -1597,28 +1597,28 @@ function read_the_docs($args = [])
                                 <div class="input-label">
                                     <label for="watermark_checkboxes"><?php _se('Watermark user toggles'); ?></label>
                                     <?php echo CHV\Render\get_checkbox_html([
-                                        'name' => 'watermark_enable_guest',
-                                        'label' => _s('Enable watermark on guest uploads'),
-                                        'checked' => ((bool)(get_safe_post() ? get_safe_post()['watermark_enable_guest'] : CHV\Settings::get('watermark_enable_guest'))),
+                                        'name'    => 'watermark_enable_guest',
+                                        'label'   => _s('Enable watermark on guest uploads'),
+                                        'checked' => ((bool) (get_safe_post() ? get_safe_post()['watermark_enable_guest'] : CHV\Settings::get('watermark_enable_guest'))),
                                     ]); ?>
                                     <?php echo CHV\Render\get_checkbox_html([
-                                        'name' => 'watermark_enable_user',
-                                        'label' => _s('Enable watermark on user uploads'),
-                                        'checked' => ((bool)(get_safe_post() ? get_safe_post()['watermark_enable_user'] : CHV\Settings::get('watermark_enable_user'))),
+                                        'name'    => 'watermark_enable_user',
+                                        'label'   => _s('Enable watermark on user uploads'),
+                                        'checked' => ((bool) (get_safe_post() ? get_safe_post()['watermark_enable_user'] : CHV\Settings::get('watermark_enable_user'))),
                                     ]); ?>
                                     <?php echo CHV\Render\get_checkbox_html([
-                                        'name' => 'watermark_enable_admin',
-                                        'label' => _s('Enable watermark on admin uploads'),
-                                        'checked' => ((bool)(get_safe_post() ? get_safe_post()['watermark_enable_admin'] : CHV\Settings::get('watermark_enable_admin'))),
+                                        'name'    => 'watermark_enable_admin',
+                                        'label'   => _s('Enable watermark on admin uploads'),
+                                        'checked' => ((bool) (get_safe_post() ? get_safe_post()['watermark_enable_admin'] : CHV\Settings::get('watermark_enable_admin'))),
                                     ]); ?>
                                 </div>
 
                                 <div class="input-label">
                                     <label for="watermark_checkboxes"><?php _se('Watermark file toggles'); ?></label>
                                     <?php echo CHV\Render\get_checkbox_html([
-                                        'name' => 'watermark_enable_file_gif',
-                                        'label' => _s('Enable watermark on GIF image uploads'),
-                                        'checked' => ((bool)(get_safe_post() ? get_safe_post()['watermark_enable_file_gif'] : CHV\Settings::get('watermark_enable_file_gif'))),
+                                        'name'    => 'watermark_enable_file_gif',
+                                        'label'   => _s('Enable watermark on GIF image uploads'),
+                                        'checked' => ((bool) (get_safe_post() ? get_safe_post()['watermark_enable_file_gif'] : CHV\Settings::get('watermark_enable_file_gif'))),
                                     ]); ?>
                                 </div>
 
@@ -1653,7 +1653,7 @@ function read_the_docs($args = [])
                                     <label for="watermark_image"><?php _se('Watermark image'); ?></label>
                                     <div class="transparent-canvas dark margin-bottom-10" style="max-width: 200px;"><img
                                                 class="display-block" width="100%"
-                                                src="<?php echo CHV\get_system_image_url(CHV\Settings::get('watermark_image')) . '?' . G\random_string(8); ?>">
+                                                src="<?php echo CHV\get_system_image_url(CHV\Settings::get('watermark_image')).'?'.G\random_string(8); ?>">
                                     </div>
                                     <div class="c5 phablet-c1">
                                         <input id="watermark_image" name="watermark_image" type="file"
@@ -1668,15 +1668,15 @@ function read_the_docs($args = [])
                                                                        id="watermark_position" class="text-input">
                                             <?php
                                             echo CHV\Render\get_select_options_html([
-                                                'left top' => _s('left top'),
-                                                'left center' => _s('left center'),
-                                                'left bottom' => _s('left bottom'),
-                                                'center top' => _s('center top'),
+                                                'left top'      => _s('left top'),
+                                                'left center'   => _s('left center'),
+                                                'left bottom'   => _s('left bottom'),
+                                                'center top'    => _s('center top'),
                                                 'center center' => _s('center center'),
                                                 'center bottom' => _s('center bottom'),
-                                                'right top' => _s('right top'),
-                                                'right center' => _s('right center'),
-                                                'right bottom' => _s('right bottom'),
+                                                'right top'     => _s('right top'),
+                                                'right center'  => _s('right center'),
+                                                'right bottom'  => _s('right bottom'),
                                             ], get_safe_post() ? get_safe_post()['watermark_position'] : CHV\Settings::get('watermark_position')); ?>
                                         </select></div>
                                     <div class="input-below input-warning red-warning clear-both"><?php echo get_input_errors()['watermark_position']; ?></div>
@@ -1725,12 +1725,12 @@ function read_the_docs($args = [])
                     } ?>
 
                     <?php if (get_settings()['key'] == 'categories') {
-                    ?>
+                        ?>
                     <?php if (!CHV\getSetting('website_explore_page')) {
-                    ?>
-                        <div class="growl static"><?php _se("Categories won't work when the explorer feature is turned off. To revert this setting go to %s.", ['%s' => '<a href="' . G\get_base_url('dashboard/settings/website') . '">' . _s('Dashboard > Settings > Website') . '</a>']); ?></div>
+                            ?>
+                        <div class="growl static"><?php _se("Categories won't work when the explorer feature is turned off. To revert this setting go to %s.", ['%s' => '<a href="'.G\get_base_url('dashboard/settings/website').'">'._s('Dashboard > Settings > Website').'</a>']); ?></div>
                     <?php
-                    } ?>
+                        } ?>
                         <script>
                             $(document).ready(function () {
                                 CHV.obj.categories = <?php echo json_encode(get_categories()); ?>;
@@ -1748,17 +1748,17 @@ function read_the_docs($args = [])
 					<span class="c5 display-table-cell padding-right-10"><a data-modal="edit" data-target="form-modal" data-category-id="%ID%" data-content="category-name">%NAME%</a></span>
 					<span class="c4 display-table-cell padding-right-10 phone-hide phablet-hide" data-content="category-url_key">%URL_KEY%</span>
 					<span class="c13 display-table-cell padding-right-10 phone-display-block" data-content="category-description">%DESCRIPTION%</span>
-					<span class="c2 display-table-cell"><a class="delete-link" data-category-id="%ID%" data-args="%ID%" data-confirm="' . _s("Do you really want to delete the %s category? This can't be undone.") . '" data-submit-fn="CHV.fn.category.delete.submit" data-before-fn="CHV.fn.category.delete.before" data-ajax-deferred="CHV.fn.category.delete.complete">' . _s('Delete') . '</a></span>
+					<span class="c2 display-table-cell"><a class="delete-link" data-category-id="%ID%" data-args="%ID%" data-confirm="'._s("Do you really want to delete the %s category? This can't be undone.").'" data-submit-fn="CHV.fn.category.delete.submit" data-before-fn="CHV.fn.category.delete.before" data-ajax-deferred="CHV.fn.category.delete.complete">'._s('Delete').'</a></span>
 				</li>';
-                            if (get_categories()) {
-                                foreach (get_categories() as $category) {
-                                    $replaces = [];
-                                    foreach ($category as $k => $v) {
-                                        $replaces['%' . strtoupper($k) . '%'] = $v;
-                                    }
-                                    echo strtr($li_template, $replaces);
+                        if (get_categories()) {
+                            foreach (get_categories() as $category) {
+                                $replaces = [];
+                                foreach ($category as $k => $v) {
+                                    $replaces['%'.strtoupper($k).'%'] = $v;
                                 }
-                            } ?>
+                                echo strtr($li_template, $replaces);
+                            }
+                        } ?>
                         </ul>
                         <div class="hidden" data-content="category-dashboard-template">
                             <?php echo $li_template; ?>
@@ -1778,11 +1778,11 @@ function read_the_docs($args = [])
                     } ?>
                     <?php
                     if (get_settings()['key'] == 'ip-bans') {
-                    try {
-                        $ip_bans = CHV\Ip_ban::getAll();
-                    } catch (Exception $e) {
-                        G\exception_to_error($e);
-                    } ?>
+                        try {
+                            $ip_bans = CHV\Ip_ban::getAll();
+                        } catch (Exception $e) {
+                            G\exception_to_error($e);
+                        } ?>
                         <script>
                             $(document).ready(function () {
                                 CHV.obj.ip_bans = <?php echo json_encode($ip_bans); ?>;
@@ -1800,15 +1800,15 @@ function read_the_docs($args = [])
 					<span class="c6 display-table-cell padding-right-10"><a data-modal="edit" data-target="form-modal" data-ip_ban-id="%ID%" data-content="ip_ban-ip">%IP%</a></span>
 					<span class="c5 display-table-cell padding-right-10 phone-hide phablet-hide" data-content="ip_ban-expires">%EXPIRES%</span>
 					<span class="c14 display-table-cell padding-right-10 phone-display-block" data-content="ip_ban-message">%MESSAGE%</span>
-					<span class="c2 display-table-cell"><a class="delete-link" data-ip_ban-id="%ID%" data-args="%ID%" data-confirm="' . _s("Do you really want to remove the ban to the IP %s? This can't be undone.") . '" data-submit-fn="CHV.fn.ip_ban.delete.submit" data-before-fn="CHV.fn.ip_ban.delete.before" data-ajax-deferred="CHV.fn.ip_ban.delete.complete">' . _s('Delete') . '</a></span>
+					<span class="c2 display-table-cell"><a class="delete-link" data-ip_ban-id="%ID%" data-args="%ID%" data-confirm="'._s("Do you really want to remove the ban to the IP %s? This can't be undone.").'" data-submit-fn="CHV.fn.ip_ban.delete.submit" data-before-fn="CHV.fn.ip_ban.delete.before" data-ajax-deferred="CHV.fn.ip_ban.delete.complete">'._s('Delete').'</a></span>
 				</li>';
-                            foreach ($ip_bans as $ip_ban) {
-                                $replaces = [];
-                                foreach ($ip_ban as $k => $v) {
-                                    $replaces['%' . strtoupper($k) . '%'] = $v;
-                                }
-                                echo strtr($li_template, $replaces);
-                            } ?>
+                        foreach ($ip_bans as $ip_ban) {
+                            $replaces = [];
+                            foreach ($ip_ban as $k => $v) {
+                                $replaces['%'.strtoupper($k).'%'] = $v;
+                            }
+                            echo strtr($li_template, $replaces);
+                        } ?>
                         </ul>
                         <div class="hidden" data-content="ip_ban-dashboard-template">
                             <?php echo $li_template; ?>
@@ -1827,13 +1827,13 @@ function read_the_docs($args = [])
                     } ?>
 
                     <?php if (get_settings()['key'] == 'users') {
-                    ?>
+                        ?>
                         <div class="input-label">
                             <label for="enable_signups"><?php _se('Enable signups'); ?></label>
                             <div class="c5 phablet-c1"><select type="text" name="enable_signups" id="enable_signups"
                                                                class="text-input" <?php if (CHV\getSetting('website_mode') == 'personal') {
-                                    echo ' disabled';
-                                } ?>>
+                            echo ' disabled';
+                        } ?>>
                                     <?php
                                     echo CHV\Render\get_select_options_html([1 => _s('Enabled'), 0 => _s('Disabled')], CHV\Settings::get('enable_signups')); ?>
                                 </select></div>
@@ -1857,8 +1857,8 @@ function read_the_docs($args = [])
                             <div class="c3"><input type="number" min="0" pattern="\d+" name="user_minimum_age"
                                                    id="user_minimum_age"
                                                    class="text-input" <?php if (CHV\getSetting('website_mode') == 'personal') {
-                                    echo ' disabled';
-                                } ?>
+                                        echo ' disabled';
+                                    } ?>
                                                    value="<?php echo get_safe_post() ? get_safe_post()['user_minimum_age'] : CHV\Settings::get('user_minimum_age'); ?>"
                                                    placeholder="<?php _se('Empty'); ?>"></div>
                             <div class="input-below input-warning red-warning"><?php echo get_input_errors()['user_minimum_age']; ?></div>
@@ -1883,8 +1883,8 @@ function read_the_docs($args = [])
                             <label for="user_routing"><?php _se('Username routing'); ?></label>
                             <div class="c5 phablet-c1"><select type="text" name="user_routing" id="user_routing"
                                                                class="text-input" <?php if (CHV\getSetting('website_mode') == 'personal') {
-                                    echo ' disabled';
-                                } ?>>
+                                        echo ' disabled';
+                                    } ?>>
                                     <?php
                                     echo CHV\Render\get_select_options_html([1 => _s('Enabled'), 0 => _s('Disabled')], CHV\Settings::get('user_routing')); ?>
                                 </select></div>
@@ -1899,8 +1899,8 @@ function read_the_docs($args = [])
                             <div class="c5 phablet-c1"><select type="text" name="require_user_email_confirmation"
                                                                id="require_user_email_confirmation"
                                                                class="text-input" <?php if (CHV\getSetting('website_mode') == 'personal') {
-                                    echo ' disabled';
-                                } ?>>
+                                        echo ' disabled';
+                                    } ?>>
                                     <?php
                                     echo CHV\Render\get_select_options_html([1 => _s('Enabled'), 0 => _s('Disabled')], CHV\Settings::get('require_user_email_confirmation')); ?>
                                 </select></div>
@@ -1912,8 +1912,8 @@ function read_the_docs($args = [])
                             <div class="c5 phablet-c1"><select type="text" name="require_user_email_social_signup"
                                                                id="require_user_email_social_signup"
                                                                class="text-input" <?php if (CHV\getSetting('website_mode') == 'personal') {
-                                    echo ' disabled';
-                                } ?>>
+                                        echo ' disabled';
+                                    } ?>>
                                     <?php
                                     echo CHV\Render\get_select_options_html([1 => _s('Enabled'), 0 => _s('Disabled')], CHV\Settings::get('require_user_email_social_signup')); ?>
                                 </select></div>
@@ -1950,7 +1950,7 @@ function read_the_docs($args = [])
                     } ?>
 
                     <?php if (get_settings()['key'] == 'consent-screen') {
-                    ?>
+                        ?>
                         <p><?php _se("Shows a consent screen before accessing the website. Useful for adult content websites where minors shouldn't be allowed."); ?></p>
                         <div class="input-label">
                             <label for="enable_consent_screen"><?php _se('Enable consent screen'); ?></label>
@@ -1964,8 +1964,8 @@ function read_the_docs($args = [])
                         <div id="consent-screen-combo">
                             <div data-combo-value="1"
                                  class="switch-combo <?php if (!(get_safe_post() ? get_safe_post()['enable_consent_screen'] : CHV\Settings::get('enable_consent_screen'))) {
-                                     echo ' soft-hidden';
-                                 } ?>">
+                                        echo ' soft-hidden';
+                                    } ?>">
                                 <div class="input-label">
                                     <label for="consent_screen_cover_image"><?php _se('Consent screen cover image'); ?></label>
                                     <div class="transparent-canvas dark margin-bottom-10" style="max-width: 200px;"><img
@@ -1984,7 +1984,7 @@ function read_the_docs($args = [])
                     } ?>
 
                     <?php if (get_settings()['key'] == 'flood-protection') {
-                    ?>
+                        ?>
                         <p><?php _se("Block image uploads by IP if the system notice a flood  behavior based on the number of uploads per time period. This setting doesn't affect administrators."); ?></p>
                         <div class="input-label">
                             <label for="flood_uploads_protection"><?php _se('Flood protection'); ?></label>
@@ -1998,8 +1998,8 @@ function read_the_docs($args = [])
                         <div id="flood-protection-combo">
                             <div data-combo-value="1"
                                  class="switch-combo <?php if (!(get_safe_post() ? get_safe_post()['flood_uploads_protection'] : CHV\Settings::get('flood_uploads_protection'))) {
-                                     echo ' soft-hidden';
-                                 } ?>">
+                                        echo ' soft-hidden';
+                                    } ?>">
                                 <div class="input-label">
                                     <label for="flood_uploads_notify"><?php _se('Notify to email'); ?></label>
                                     <div class="c5 phablet-c1"><select type="text" name="flood_uploads_notify"
@@ -2060,7 +2060,7 @@ function read_the_docs($args = [])
                     } ?>
 
                     <?php if (get_settings()['key'] == 'content') {
-                    ?>
+                        ?>
                         <div class="input-label">
                             <label for="show_nsfw_in_listings"><?php _se('Show not safe content in listings'); ?></label>
                             <div class="c5 phablet-c1"><select type="text" name="show_nsfw_in_listings"
@@ -2101,7 +2101,7 @@ function read_the_docs($args = [])
                     } ?>
 
                     <?php if (get_settings()['key'] == 'listings') {
-                    ?>
+                        ?>
                         <div class="input-label">
                             <label for="listing_items_per_page"><?php _se('List items per page'); ?></label>
                             <div class="c2"><input type="number" min="1" name="listing_items_per_page"
@@ -2216,18 +2216,18 @@ function read_the_docs($args = [])
                     } ?>
 
                     <?php if (get_settings()['key'] == 'theme') {
-                    ?>
+                        ?>
                         <p><?php echo read_the_docs(['%s' => _s('theme editing'), '%k' => 'theme']); ?></p>
                     <hr class="line-separator">
                         <div class="input-label">
                             <label for="theme"><?php _se('Theme'); ?></label>
                             <?php
                             $themes = [];
-                            foreach (scandir(G_APP_PATH_THEMES) as $v) {
-                                if (is_dir(G_APP_PATH_THEMES . DIRECTORY_SEPARATOR . $v) and !in_array($v, ['.', '..'])) {
-                                    $themes[$v] = $v;
-                                }
-                            } ?>
+                        foreach (scandir(G_APP_PATH_THEMES) as $v) {
+                            if (is_dir(G_APP_PATH_THEMES.DIRECTORY_SEPARATOR.$v) and !in_array($v, ['.', '..'])) {
+                                $themes[$v] = $v;
+                            }
+                        } ?>
                             <div class="c5 phablet-c1">
                                 <select type="text" name="theme" id="theme" class="text-input">
                                     <?php
@@ -2277,13 +2277,13 @@ function read_the_docs($args = [])
                                                                id="theme_top_bar_button_color" class="text-input">
                                     <?php
                                     echo CHV\Render\get_select_options_html([
-                                        'blue' => _s('Blue'),
-                                        'green' => _s('Green'),
-                                        'orange' => _s('Orange'),
-                                        'red' => _s('Red'),
-                                        'grey' => _s('Grey'),
-                                        'black' => _s('Black'),
-                                        'white' => _s('White'),
+                                        'blue'    => _s('Blue'),
+                                        'green'   => _s('Green'),
+                                        'orange'  => _s('Orange'),
+                                        'red'     => _s('Red'),
+                                        'grey'    => _s('Grey'),
+                                        'black'   => _s('Black'),
+                                        'white'   => _s('White'),
                                         'default' => _s('Default'),
                                     ], get_safe_post() ? get_safe_post()['theme_top_bar_button_color'] : CHV\Settings::get('theme_top_bar_button_color'), CHV\Settings::get('theme_top_bar_button_color')); ?>
                                 </select></div>
@@ -2314,13 +2314,13 @@ function read_the_docs($args = [])
                         <div id="logo-vector-combo">
                             <div data-combo-value="1"
                                  class="switch-combo c9 phablet-c1<?php if ((get_safe_post() ? get_safe_post()['logo_vector_enable'] : CHV\Settings::get('logo_vector_enable')) != 1) {
-                                     echo ' soft-hidden';
-                                 } ?>">
+                                        echo ' soft-hidden';
+                                    } ?>">
                                 <div class="input-label">
                                     <label for="logo_vector"><?php _se('Vector logo image'); ?></label>
                                     <div class="transparent-canvas dark margin-bottom-10" style="max-width: 200px;"><img
                                                 class="display-block" width="100%"
-                                                src="<?php echo CHV\get_system_image_url(CHV\Settings::get('logo_vector')) . '?' . G\random_string(8); ?>">
+                                                src="<?php echo CHV\get_system_image_url(CHV\Settings::get('logo_vector')).'?'.G\random_string(8); ?>">
                                     </div>
                                     <div class="c5 phablet-c1">
                                         <input id="logo_vector" name="logo_vector" type="file" accept="image/svg">
@@ -2335,7 +2335,7 @@ function read_the_docs($args = [])
                             <label for="logo_image"><?php _se('Raster logo image'); ?></label>
                             <div class="transparent-canvas dark margin-bottom-10" style="max-width: 200px;"><img
                                         class="display-block" width="100%"
-                                        src="<?php echo CHV\get_system_image_url(CHV\Settings::get('logo_image')) . '?' . G\random_string(8); ?>">
+                                        src="<?php echo CHV\get_system_image_url(CHV\Settings::get('logo_image')).'?'.G\random_string(8); ?>">
                             </div>
                             <div class="c5 phablet-c1">
                                 <input id="logo_image" name="logo_image" type="file" accept="image/*">
@@ -2360,7 +2360,7 @@ function read_the_docs($args = [])
                             <label for="favicon_image"><?php _se('Favicon image'); ?></label>
                             <div class="transparent-canvas dark margin-bottom-10" style="max-width: 100px;"><img
                                         class="display-block" width="100%"
-                                        src="<?php echo CHV\get_system_image_url(CHV\Settings::get('favicon_image')) . '?' . G\random_string(8); ?>">
+                                        src="<?php echo CHV\get_system_image_url(CHV\Settings::get('favicon_image')).'?'.G\random_string(8); ?>">
                             </div>
                             <div class="c5 phablet-c1">
                                 <input id="favicon_image" name="favicon_image" type="file" accept="image/*">
@@ -2471,15 +2471,15 @@ function read_the_docs($args = [])
                     } ?>
 
                     <?php if (get_settings()['key'] == 'homepage') {
-                    ?>
+                        ?>
                         <div class="input-label">
                             <label for="homepage_style"><?php _se('Style'); ?></label>
                             <div class="c5 phablet-c1"><select type="text" name="homepage_style" id="homepage_style"
                                                                class="text-input" data-combo="home-style-combo">
                                     <?php
                                     echo CHV\Render\get_select_options_html([
-                                        'landing' => _s('Landing page'),
-                                        'split' => _s('Split landing + images'),
+                                        'landing'       => _s('Landing page'),
+                                        'split'         => _s('Split landing + images'),
                                         'route_explore' => _s('Route explore'),
                                     ], CHV\Settings::get('homepage_style')); ?>
                                 </select></div>
@@ -2489,32 +2489,32 @@ function read_the_docs($args = [])
                         <div id="home-style-combo">
                             <div data-combo-value="landing split"
                                  class="switch-combo<?php if (!in_array((get_safe_post() ? get_safe_post()['homepage_style'] : CHV\Settings::get('homepage_style')), ['split', 'landing'])) {
-                                     echo ' soft-hidden';
-                                 } ?>">
+                                        echo ' soft-hidden';
+                                    } ?>">
                                 <?php
                                 foreach (CHV\Settings::get('homepage_cover_images') as $k => $v) {
                                     $cover_index = $k + 1;
-                                    $cover_label = 'homepage_cover_image_' . $k; ?>
+                                    $cover_label = 'homepage_cover_image_'.$k; ?>
                                     <div class="input-label">
                                         <label for="<?php echo $cover_label; ?>"><?php _se('Cover image');
-                                            echo ' (' . $cover_index . ')'; ?></label>
+                                    echo ' ('.$cover_index.')'; ?></label>
                                         <div class="transparent-canvas dark margin-bottom-10" style="max-width: 200px;">
                                             <img class="display-block" width="100%" src="<?php echo $v['url']; ?>">
                                         </div>
                                         <?php if (count(CHV\Settings::get('homepage_cover_images')) > 1) {
-                                            ?>
+                                        ?>
                                             <div class="margin-top-10 margin-bottom-10">
                                                 <a class="delete-link"
                                                    data-confirm="<?php _se("Do you really want to delete this image? This can't be undone."); ?>"
-                                                   href="<?php echo G\get_base_url('dashboard/settings/homepage?action=delete-cover&cover=' . $cover_index); ?>"><?php _se('Delete image'); ?></a>
+                                                   href="<?php echo G\get_base_url('dashboard/settings/homepage?action=delete-cover&cover='.$cover_index); ?>"><?php _se('Delete image'); ?></a>
                                             </div>
                                             <?php
-                                        } ?>
+                                    } ?>
                                         <div class="c5 phablet-c1">
                                             <input id="<?php echo $cover_label; ?>" name="<?php echo $cover_label; ?>"
                                                    type="file" accept="image/*">
                                         </div>
-                                        <div class="input-below input-warning red-warning"><?php echo get_input_errors()['homepage_cover_image_' . $k]; ?></div>
+                                        <div class="input-below input-warning red-warning"><?php echo get_input_errors()['homepage_cover_image_'.$k]; ?></div>
                                     </div>
                                     <?php
                                 } ?>
@@ -2537,7 +2537,7 @@ function read_the_docs($args = [])
                                                     class="optional"><?php _se('optional'); ?></span></label>
                                         <div class="transparent-canvas dark margin-bottom-10" style="max-width: 200px;">
                                             <img class="display-block" width="100%"
-                                                 src="<?php echo CHV\get_system_image_url(CHV\Settings::get('logo_vector_homepage')) . '?' . G\random_string(8); ?>">
+                                                 src="<?php echo CHV\get_system_image_url(CHV\Settings::get('logo_vector_homepage')).'?'.G\random_string(8); ?>">
                                         </div>
                                         <div class="c5 phablet-c1">
                                             <input id="logo_vector_homepage" name="logo_vector_homepage" type="file"
@@ -2547,14 +2547,13 @@ function read_the_docs($args = [])
                                         <div class="input-below"><?php _se('Vector version or your website logo in SVG format (only for homepage).'); ?></div>
                                     </div>
                                     <?php
-                                } // landing logo vector
-                                ?>
+                                } // landing logo vector ?>
                                 <div class="input-label">
                                     <label for="logo_image_homepage"><?php _se('Raster logo image'); ?> <span
                                                 class="optional"><?php _se('optional'); ?></span></label>
                                     <div class="transparent-canvas dark margin-bottom-10" style="max-width: 200px;"><img
                                                 class="display-block" width="100%"
-                                                src="<?php echo CHV\get_system_image_url(CHV\Settings::get('logo_image_homepage')) . '?' . G\random_string(8); ?>">
+                                                src="<?php echo CHV\get_system_image_url(CHV\Settings::get('logo_image_homepage')).'?'.G\random_string(8); ?>">
                                     </div>
                                     <div class="c5 phablet-c1">
                                         <input id="logo_image_homepage" name="logo_image_homepage" type="file"
@@ -2592,13 +2591,13 @@ function read_the_docs($args = [])
                                                                        id="homepage_cta_color" class="text-input">
                                             <?php
                                             echo CHV\Render\get_select_options_html([
-                                                'blue' => _s('Blue'),
-                                                'green' => _s('Green'),
-                                                'orange' => _s('Orange'),
-                                                'red' => _s('Red'),
-                                                'grey' => _s('Grey'),
-                                                'black' => _s('Black'),
-                                                'white' => _s('White'),
+                                                'blue'    => _s('Blue'),
+                                                'green'   => _s('Green'),
+                                                'orange'  => _s('Orange'),
+                                                'red'     => _s('Red'),
+                                                'grey'    => _s('Grey'),
+                                                'black'   => _s('Black'),
+                                                'white'   => _s('White'),
                                                 'default' => _s('Default'),
                                             ], get_safe_post() ? get_safe_post()['homepage_cta_color'] : CHV\Settings::get('homepage_cta_color'), CHV\Settings::get('homepage_cta_color')); ?>
                                         </select></div>
@@ -2625,7 +2624,7 @@ function read_the_docs($args = [])
                                             <?php
                                             echo CHV\Render\get_select_options_html([
                                                 'cta-upload' => _s('Trigger uploader'),
-                                                'cta-link' => _s('Open URL'),
+                                                'cta-link'   => _s('Open URL'),
                                             ], CHV\Settings::get('homepage_cta_fn')); ?>
                                         </select></div>
                                     <div class="input-warning red-warning"><?php echo get_input_errors()['homepage_cta_fn']; ?></div>
@@ -2633,8 +2632,8 @@ function read_the_docs($args = [])
                                 <div id="cta-fn-combo">
                                     <div data-combo-value="cta-link"
                                          class="switch-combo<?php if ((get_safe_post() ? get_safe_post()['homepage_cta_fn'] : CHV\Settings::get('homepage_cta_fn')) !== 'cta-link') {
-                                             echo ' soft-hidden';
-                                         } ?>">
+                                                echo ' soft-hidden';
+                                            } ?>">
                                         <div class="input-label">
                                             <label for="homepage_cta_fn_extra"><?php _se('Call to action URL'); ?></label>
                                             <div class="c9 phablet-c1"><input type="text" name="homepage_cta_fn_extra"
@@ -2661,8 +2660,8 @@ function read_the_docs($args = [])
                             </div>
                             <div data-combo-value="split"
                                  class="switch-combo<?php if ((get_safe_post() ? get_safe_post()['homepage_style'] : CHV\Settings::get('homepage_style')) !== 'split') {
-                                     echo ' soft-hidden';
-                                 } ?>">
+                                                echo ' soft-hidden';
+                                            } ?>">
                                 <div class="input-label">
                                     <label for="homepage_uids"><?php _se('User IDs'); ?></label>
                                     <div class="c4"><input type="text" name="homepage_uids" id="homepage_uids"
@@ -2681,16 +2680,16 @@ function read_the_docs($args = [])
                     } ?>
 
                     <?php if (get_settings()['key'] == 'banners') {
-                    ?>
+                        ?>
                         <p><?php echo read_the_docs(['%s' => _s('banners'), '%k' => 'banners']); ?></p>
                         <?php
                         $banners = get_banners();
                         $banner_keys = array_keys($banners);
                         $last_banner = end($banner_keys);
-                    foreach ($banners
+                        foreach ($banners
 
                              as $k => $group) {
-                        ?>
+                            ?>
                         <h3 class="margin-top-20"><?php echo $group['label']; ?></h3>
                         <?php
                     foreach ($group['placements'] as $id => $banner) {
@@ -2716,13 +2715,13 @@ function read_the_docs($args = [])
                     <?php
                     } ?>
                     <?php
-                    } ?>
+                        } ?>
 
                     <?php
                     } ?>
 
                     <?php if (get_settings()['key'] == 'system') {
-                    ?>
+                        ?>
                         <div class="input-label">
                             <label for="enable_automatic_updates_check"><?php _se('Automatic updates check'); ?></label>
                             <div class="c5 phablet-c1"><select type="text" name="enable_automatic_updates_check"
@@ -2758,18 +2757,18 @@ function read_the_docs($args = [])
 
                     <hr class="line-separator">
                         <?php foreach (['image', 'album'] as $v) {
-                        ?>
+                                        ?>
                         <div class="input-label">
                             <label for="seo_<?php echo $v; ?>_urls"><?php _se('SEO %s URLs', _s($v)); ?></label>
                             <div class="c5 phablet-c1"><select type="text" name="seo_<?php echo $v; ?>_urls"
                                                                id="seo_<?php echo $v; ?>_urls" class="text-input">
                                     <?php
-                                    echo CHV\Render\get_select_options_html([1 => _s('Enabled'), 0 => _s('Disabled')], CHV\Settings::get('seo_' . $v . '_urls')); ?>
+                                    echo CHV\Render\get_select_options_html([1 => _s('Enabled'), 0 => _s('Disabled')], CHV\Settings::get('seo_'.$v.'_urls')); ?>
                                 </select></div>
                             <div class="input-below"><?php _se('Enable this if you want to use SEO %s URLs.', _s($v)); ?></div>
                         </div>
                         <?php
-                    } ?>
+                                    } ?>
                     <hr class="line-separator">
                         <div class="input-label">
                             <label for="minify_enable"><?php _se('Minify code'); ?></label>
@@ -2822,8 +2821,8 @@ function read_the_docs($args = [])
                     } ?>
 
                     <?php if (get_settings()['key'] == 'routing') {
-                    ?>
-                        <p><?php _se('Routing allows you to customize default route binds on the fly. Only alphanumeric, hyphen and underscore characters are allowed. Check out our %s if you want to override or add new routes.', '<a href="https://chevereto.com/docs/routes">' . _s('documentation') . '</a>'); ?></p>
+                        ?>
+                        <p><?php _se('Routing allows you to customize default route binds on the fly. Only alphanumeric, hyphen and underscore characters are allowed. Check out our %s if you want to override or add new routes.', '<a href="https://chevereto.com/docs/routes">'._s('documentation').'</a>'); ?></p>
                         <div class="input-label">
                             <label for="route_image"><?php _se('Image routing'); ?></label>
                             <div class="c9 phablet-c1">
@@ -2875,7 +2874,7 @@ function read_the_docs($args = [])
                                     <?php
                                     echo CHV\Render\get_select_options_html([1 => _s('Enabled'), 0 => _s('Disabled')], CHV\Settings::get('lang_subdomain_wildcard')); ?>
                                 </select></div>
-                            <div class="input-below"><?php _se('Enable to use %s for %t.', ['%t' => _s('languages'), '%s' => G\str_replace_first(CHV_HTTP_HOST, 'es' . '.' . CHV_HTTP_HOST, CHV_ROOT_URL)]); ?></div>
+                            <div class="input-below"><?php _se('Enable to use %s for %t.', ['%t' => _s('languages'), '%s' => G\str_replace_first(CHV_HTTP_HOST, 'es'.'.'.CHV_HTTP_HOST, CHV_ROOT_URL)]); ?></div>
                         </div>
                         <div class="input-label">
                             <label for="user_subdomain_wildcard"><?php _se('Username subdomains'); ?></label>
@@ -2884,13 +2883,13 @@ function read_the_docs($args = [])
                                     <?php
                                     echo CHV\Render\get_select_options_html([1 => _s('Enabled'), 0 => _s('Disabled')], CHV\Settings::get('user_subdomain_wildcard')); ?>
                                 </select></div>
-                            <div class="input-below"><?php _se('Enable to use %s for %t.', ['%t' => _s('user profiles'), '%s' => G\str_replace_first(CHV_HTTP_HOST, 'username' . '.' . CHV_HTTP_HOST, CHV_ROOT_URL)]); ?></div>
+                            <div class="input-below"><?php _se('Enable to use %s for %t.', ['%t' => _s('user profiles'), '%s' => G\str_replace_first(CHV_HTTP_HOST, 'username'.'.'.CHV_HTTP_HOST, CHV_ROOT_URL)]); ?></div>
                         </div>
                     <?php
                     } ?>
 
                     <?php if (get_settings()['key'] == 'languages') {
-                    ?>
+                        ?>
                         <div class="input-label">
                             <label><?php _se('Custom language strings'); ?></label>
                             <p><?php echo read_the_docs(['%s' => _s('language strings'), '%k' => 'language-strings']); ?></p>
@@ -2902,7 +2901,7 @@ function read_the_docs($args = [])
                                     <?php
                                     foreach (CHV\get_available_languages() as $k => $v) {
                                         $selected_lang = $k == CHV\Settings::get('default_language') ? ' selected' : '';
-                                        echo '<option value="' . $k . '"' . $selected_lang . '>' . $v['name'] . '</option>' . "\n";
+                                        echo '<option value="'.$k.'"'.$selected_lang.'>'.$v['name'].'</option>'."\n";
                                     } ?>
                                 </select></div>
                             <div class="input-below"><?php _se('Default base language to use.'); ?></div>
@@ -2930,19 +2929,19 @@ function read_the_docs($args = [])
                         </div>
 
                         <?php if (count(CHV\get_available_languages()) > 0) {
-                        ?>
+                                        ?>
                         <div id="language-enable-combo">
                             <div data-combo-value="1"
                                  class="switch-combo<?php if ((get_safe_post() ? get_safe_post()['language_chooser_enable'] == 0 : !CHV\Settings::get('language_chooser_enable'))) {
-                                     echo ' soft-hidden';
-                                 } ?>">
+                                            echo ' soft-hidden';
+                                        } ?>">
                                 <div class="checkbox-label">
                                     <h4 class="input-label-label"><?php _se('Enabled languages'); ?></h4>
                                     <ul class="c20 phablet-c1">
                                         <?php
                                         foreach (CHV\get_available_languages() as $k => $v) {
                                             $lang_flag = array_key_exists($k, CHV\get_enabled_languages()) ? ' checked' : null;
-                                            echo '<li class="c5 phone-c1 display-inline-block"><label class="display-block" for="languages_enable[' . $k . ']"> <input type="checkbox" name="languages_enable[]" id="languages_enable[' . $k . ']" value="' . $k . '"' . $lang_flag . '>' . $v['name'] . '</label></li>';
+                                            echo '<li class="c5 phone-c1 display-inline-block"><label class="display-block" for="languages_enable['.$k.']"> <input type="checkbox" name="languages_enable[]" id="languages_enable['.$k.']" value="'.$k.'"'.$lang_flag.'>'.$v['name'].'</label></li>';
                                         } ?>
                                     </ul>
                                     <p class="margin-top-20"><?php _se("Unchecked languages won't be used in your website."); ?></p>
@@ -2950,29 +2949,29 @@ function read_the_docs($args = [])
                             </div>
                         </div>
                     <?php
-                    } ?>
+                                    } ?>
 
                     <?php
                     } ?>
 
                     <?php
                     if (get_settings()['key'] == 'external-storage') {
-                    $getStorages = CHV\Storage::getAll();
-                    $storages = [];
-                    if ($getStorages) {
-                        foreach ($getStorages as $k => $v) {
-                            $storages[$v['id']] = $v;
+                        $getStorages = CHV\Storage::getAll();
+                        $storages = [];
+                        if ($getStorages) {
+                            foreach ($getStorages as $k => $v) {
+                                $storages[$v['id']] = $v;
+                            }
                         }
-                    }
-                    $checkbox_icons = [
-                        0 => 'icon-checkbox-unchecked',
-                        1 => 'icon-checkbox-checked',
-                    ];
-                    $storage_messages = [
-                        'is_https' => _s('Toggle this to enable or disable HTTPS'),
-                        'is_active' => _s('Toggle this to enable or disable this storage'),
-                    ];
-                    $icon_template = '<span rel="toolTip" data-tipTip="right" title="%TITLE%" class="cursor-pointer icon %ICON%" data-checked-icon="' . $checkbox_icons[1] . '" data-unchecked-icon="' . $checkbox_icons[0] . '" data-action="toggle-storage-%PROP%" data-checkbox></span>'; ?>
+                        $checkbox_icons = [
+                            0 => 'icon-checkbox-unchecked',
+                            1 => 'icon-checkbox-checked',
+                        ];
+                        $storage_messages = [
+                            'is_https'  => _s('Toggle this to enable or disable HTTPS'),
+                            'is_active' => _s('Toggle this to enable or disable this storage'),
+                        ];
+                        $icon_template = '<span rel="toolTip" data-tipTip="right" title="%TITLE%" class="cursor-pointer icon %ICON%" data-checked-icon="'.$checkbox_icons[1].'" data-unchecked-icon="'.$checkbox_icons[0].'" data-action="toggle-storage-%PROP%" data-checkbox></span>'; ?>
                         <script>
                             $(document).ready(function () {
                                 CHV.obj.storages = <?php echo json_encode($storages); ?>;
@@ -3000,21 +2999,21 @@ function read_the_docs($args = [])
 					<span class="c7 display-table-cell padding-right-10" data-content="storage-usage_label">%USAGE_LABEL%</span>
 					<span class="c2 display-table-cell padding-right-10" data-content="storage-https">%IS_HTTPS%</span>
 					<span class="c2 display-table-cell padding-right-10" data-content="storage-active">%IS_ACTIVE%</span>
-					<span class="c4 display-table-cell padding-right-10"><a href="' . G\get_base_url('search/images/?q=storage:%ID%') . '" target="_blank">' . _s('search content') . '</a></span>
+					<span class="c4 display-table-cell padding-right-10"><a href="'.G\get_base_url('search/images/?q=storage:%ID%').'" target="_blank">'._s('search content').'</a></span>
 				</li>';
 
-                            if ($storages) {
-                                foreach ($storages as $storage) {
-                                    $replaces = [];
-                                    foreach ($storage as $k => $v) {
-                                        if (in_array($k, ['is_https', 'is_active'])) {
-                                            $v = strtr($icon_template, ['%TITLE%' => $storage_messages[$k], '%ICON%' => $checkbox_icons[(int)$v], '%PROP%' => str_replace('is_', '', $k)]);
-                                        }
-                                        $replaces['%' . strtoupper($k) . '%'] = $v;
+                        if ($storages) {
+                            foreach ($storages as $storage) {
+                                $replaces = [];
+                                foreach ($storage as $k => $v) {
+                                    if (in_array($k, ['is_https', 'is_active'])) {
+                                        $v = strtr($icon_template, ['%TITLE%' => $storage_messages[$k], '%ICON%' => $checkbox_icons[(int) $v], '%PROP%' => str_replace('is_', '', $k)]);
                                     }
-                                    echo strtr($li_template, $replaces);
+                                    $replaces['%'.strtoupper($k).'%'] = $v;
                                 }
-                            } ?>
+                                echo strtr($li_template, $replaces);
+                            }
+                        } ?>
                         </ul>
                         <div class="hidden" data-content="storage-dashboard-template">
                             <?php echo $li_template; ?>
@@ -3024,7 +3023,7 @@ function read_the_docs($args = [])
                             <span class="c3 display-table-cell"><?php _se('Disk used'); ?></span>
                         </p>
                     <?php foreach (get_storage_usage() as $k => $v) {
-                    ?>
+                            ?>
                         <p>
                             <span class="c6 display-table-cell"><?php echo $v['label']; ?></span>
                             <span class="c3 display-table-cell"><?php echo $v['formatted_size']; ?></span>
@@ -3033,11 +3032,11 @@ function read_the_docs($args = [])
                             } ?><span class="c6 display-table-cell"><?php echo $v['link']; ?></span>
                         </p>
                     <?php
-                    } ?>
+                        } ?>
                     <hr class="line-separator">
                         <p><?php _se('Local storage is used by default or when no external storage is active.');
-                            echo ' ';
-                            _se('If you need help check the <a %s>storage documentation</a>.', 'href="https://goo.gl/jH5Dqx" target="_blank"'); ?></p>
+                        echo ' ';
+                        _se('If you need help check the <a %s>storage documentation</a>.', 'href="https://goo.gl/jH5Dqx" target="_blank"'); ?></p>
                         <div data-modal="form-modal" class="hidden" data-submit-fn="CHV.fn.storage.edit.submit"
                              data-before-fn="CHV.fn.storage.edit.before"
                              data-ajax-deferred="CHV.fn.storage.edit.complete"
@@ -3052,7 +3051,7 @@ function read_the_docs($args = [])
                     } ?>
 
                     <?php if (get_settings()['key'] == 'email') {
-                    ?>
+                        ?>
                         <div class="input-label">
                             <label for="email_from_name"><?php _se('From name'); ?></label>
                             <div class="c9 phablet-c1"><input type="text" name="email_from_name" id="email_from_name"
@@ -3093,12 +3092,12 @@ function read_the_docs($args = [])
                         <div id="mail-combo">
                             <?php
                             if ($GLOBALS['SMTPDebug']) {
-                                echo '<p class="highlight">' . nl2br($GLOBALS['SMTPDebug']) . '</p>';
+                                echo '<p class="highlight">'.nl2br($GLOBALS['SMTPDebug']).'</p>';
                             } ?>
                             <div data-combo-value="smtp"
                                  class="switch-combo c9 phablet-c1<?php if ((get_safe_post() ? get_safe_post()['email_mode'] : CHV\Settings::get('email_mode')) !== 'smtp') {
-                                     echo ' soft-hidden';
-                                 } ?>">
+                                echo ' soft-hidden';
+                            } ?>">
                                 <div class="input-label">
                                     <label for="email_smtp_server"><?php _se('SMTP server and port'); ?></label>
                                     <div class="overflow-auto">
@@ -3147,7 +3146,7 @@ function read_the_docs($args = [])
                     } ?>
 
                     <?php if (get_settings()['key'] == 'tools') {
-                    ?>
+                        ?>
                         <div class="input-label">
                             <label for="decode-id"><?php _se('Decode ID'); ?></label>
                             <div class="phablet-c1">
@@ -3233,7 +3232,7 @@ function read_the_docs($args = [])
                     } ?>
 
                     <?php if (get_settings()['key'] == 'social-networks') {
-                    ?>
+                        ?>
                         <p><?php echo read_the_docs(['%s' => _s('social networks'), '%k' => 'social-networks']); ?></p>
                         <div class="input-label">
                             <label for="facebook">Facebook</label>
@@ -3247,8 +3246,8 @@ function read_the_docs($args = [])
                         <div id="facebook-combo">
                             <div data-combo-value="1"
                                  class="switch-combo c9 phablet-c1<?php if (!(get_safe_post() ? get_safe_post()['facebook'] : CHV\Settings::get('facebook'))) {
-                                     echo ' soft-hidden';
-                                 } ?>">
+                                        echo ' soft-hidden';
+                                    } ?>">
                                 <div class="input-label">
                                     <label for="facebook_app_id"><?php _se('Facebook app id'); ?></label>
                                     <input type="text" name="facebook_app_id" id="facebook_app_id" class="text-input"
@@ -3277,8 +3276,8 @@ function read_the_docs($args = [])
                         <div id="twitter-combo">
                             <div data-combo-value="1"
                                  class="switch-combo c9 phablet-c1<?php if (!(get_safe_post() ? get_safe_post()['twitter'] : CHV\Settings::get('twitter'))) {
-                                     echo ' soft-hidden';
-                                 } ?>">
+                                        echo ' soft-hidden';
+                                    } ?>">
                                 <div class="input-label">
                                     <label for="twitter_api_key"><?php _se('Twitter API key'); ?></label>
                                     <input type="text" name="twitter_api_key" id="twitter_api_key" class="text-input"
@@ -3316,8 +3315,8 @@ function read_the_docs($args = [])
                         <div id="google-combo">
                             <div data-combo-value="1"
                                  class="switch-combo c9 phablet-c1<?php if (!(get_safe_post() ? get_safe_post()['google'] : CHV\Settings::get('google'))) {
-                                     echo ' soft-hidden';
-                                 } ?>">
+                                        echo ' soft-hidden';
+                                    } ?>">
                                 <div class="input-label">
                                     <label for="google_client_id"><?php _se('Google client id'); ?></label>
                                     <input type="text" name="google_client_id" id="google_client_id" class="text-input"
@@ -3346,8 +3345,8 @@ function read_the_docs($args = [])
                         <div id="vk-combo">
                             <div data-combo-value="1"
                                  class="switch-combo c9 phablet-c1<?php if (!(get_safe_post() ? get_safe_post()['vk'] : CHV\Settings::get('vk'))) {
-                                     echo ' soft-hidden';
-                                 } ?>">
+                                        echo ' soft-hidden';
+                                    } ?>">
                                 <div class="input-label">
                                     <label for="vk_client_id"><?php _se('VK client id'); ?></label>
                                     <input type="text" name="vk_client_id" id="vk_client_id" class="text-input"
@@ -3366,7 +3365,7 @@ function read_the_docs($args = [])
                     } ?>
 
                     <?php if (get_settings()['key'] == 'external-services') {
-                    ?>
+                        ?>
 
                         <div class="input-label">
                             <label for="akismet"><?php _se('%s spam protection', 'Akismet'); ?></label>
@@ -3376,15 +3375,15 @@ function read_the_docs($args = [])
                                     echo CHV\Render\get_select_options_html([1 => _s('Enabled'), 0 => _s('Disabled')], get_safe_post() ? get_safe_post()['akismet'] : CHV\Settings::get('akismet')); ?>
                                 </select></div>
                             <div class="input-below"><?php _se('Enable this to use %l to block spam on %c.', [
-                                    '%l' => '<a href="https://akismet.com/" target="_blank">Akismet</a>',
-                                    '%c' => _s('user generated content')
-                                ]); ?></div>
+                                '%l' => '<a href="https://akismet.com/" target="_blank">Akismet</a>',
+                                '%c' => _s('user generated content'),
+                            ]); ?></div>
                         </div>
                         <div id="akismet-combo" class="c9 phablet-c1">
                             <div data-combo-value="1"
                                  class="switch-combo<?php if (!(get_safe_post() ? get_safe_post()['akismet'] : CHV\Settings::get('akismet'))) {
-                                     echo ' soft-hidden';
-                                 } ?>">
+                                    echo ' soft-hidden';
+                                } ?>">
                                 <div class="input-label">
                                     <label for="akismet_api_key"><?php _se('%s API key', 'Akismet'); ?></label>
                                     <input type="text" name="akismet_api_key" id="akismet_api_key" class="text-input"
@@ -3402,9 +3401,9 @@ function read_the_docs($args = [])
                                     echo CHV\Render\get_select_options_html([1 => _s('Enabled'), 0 => _s('Disabled')], get_safe_post() ? get_safe_post()['stopforumspam'] : CHV\Settings::get('stopforumspam')); ?>
                                 </select></div>
                             <div class="input-below"><?php _se('Enable this to use %l to block spam on %c.', [
-                                    '%l' => '<a href="https://stopforumspam.com/" target="_blank">StopForumSpam</a>',
-                                    '%c' => _s('user signup')
-                                ]); ?></div>
+                                '%l' => '<a href="https://stopforumspam.com/" target="_blank">StopForumSpam</a>',
+                                '%c' => _s('user signup'),
+                            ]); ?></div>
                         </div>
 
                     <hr class="line-separator">
@@ -3420,8 +3419,8 @@ function read_the_docs($args = [])
                         <div id="cdn-combo" class="c9 phablet-c1">
                             <div data-combo-value="1"
                                  class="switch-combo<?php if (!(get_safe_post() ? get_safe_post()['cdn'] : CHV\Settings::get('cdn'))) {
-                                     echo ' soft-hidden';
-                                 } ?>">
+                                        echo ' soft-hidden';
+                                    } ?>">
                                 <div class="input-label">
                                     <label for="cdn_url">CDN URL</label>
                                     <input type="text" name="cdn_url" id="cdn_url" class="text-input"
@@ -3444,8 +3443,8 @@ function read_the_docs($args = [])
                         <div id="recaptcha-combo">
                             <div data-combo-value="1"
                                  class="switch-combo<?php if (!(get_safe_post() ? get_safe_post()['recaptcha'] : CHV\Settings::get('recaptcha'))) {
-                                     echo ' soft-hidden';
-                                 } ?>">
+                                        echo ' soft-hidden';
+                                    } ?>">
                                 <div class="input-label">
                                     <label for="recaptcha_version">reCAPTCHA version</label>
                                     <div class="c2 phablet-c1"><select type="text" name="recaptcha_version"
@@ -3502,7 +3501,7 @@ function read_the_docs($args = [])
                                     <?php
                                     echo CHV\Render\get_select_options_html([
                                         'disqus' => 'Disqus',
-                                        'js' => 'JavaScript/HTML',
+                                        'js'     => 'JavaScript/HTML',
                                     ], get_safe_post() ? get_safe_post()['comments_api'] : CHV\Settings::get('comments_api')); ?>
                                 </select></div>
                             <div class="input-below"><?php _se('Disqus API works with %s.', '<a href="https://help.disqus.com/customer/portal/articles/236206" target="_blank">Single Sign-On</a> (SSO)'); ?></div>
@@ -3510,8 +3509,8 @@ function read_the_docs($args = [])
                         <div id="comments_api-combo">
                             <div data-combo-value="disqus"
                                  class="switch-combo<?php if ((get_safe_post() ? get_safe_post()['comments_api'] : CHV\Settings::get('comments_api')) !== 'disqus') {
-                                     echo ' soft-hidden';
-                                 } ?>">
+                                        echo ' soft-hidden';
+                                    } ?>">
                                 <div class="c9 phablet-c1">
                                     <div class="input-label">
                                         <label for="disqus_shortname"><?php _se('Disqus shortname'); ?></label>
@@ -3538,8 +3537,8 @@ function read_the_docs($args = [])
                             </div>
                             <div data-combo-value="js"
                                  class="switch-combo<?php if ((get_safe_post() ? get_safe_post()['comments_api'] : CHV\Settings::get('comments_api')) !== 'js') {
-                                     echo ' soft-hidden';
-                                 } ?>">
+                                        echo ' soft-hidden';
+                                    } ?>">
                                 <div class="input-label">
                                     <label for="comment_code"><?php _se('Comment code'); ?></label>
                                     <div class="c12 phablet-c1"><textarea type="text" name="comment_code"
@@ -3572,7 +3571,7 @@ function read_the_docs($args = [])
                     } ?>
 
                     <?php if (get_settings()['key'] == 'api') {
-                    ?>
+                        ?>
                         <p><?php _se('For documentation about the API check the <a %s>API documentation</a>', 'href="http://bit.ly/1EFSP0H" target="_blank"'); ?></p>
                         <div class="input-label">
                             <label for="api_v1_key"><?php _se('API v1 key'); ?></label>
@@ -3587,7 +3586,7 @@ function read_the_docs($args = [])
                     } ?>
 
                     <?php if (get_settings()['key'] == 'additional-settings') {
-                    ?>
+                        ?>
                         <div class="input-label">
                             <label for="enable_plugin_route"><?php _se('Plugin route'); ?></label>
                             <div class="c5 phablet-c1"><select type="text" name="enable_plugin_route"
@@ -3596,9 +3595,9 @@ function read_the_docs($args = [])
                                     echo CHV\Render\get_select_options_html([1 => _s('Enabled'), 0 => _s('Disabled')], CHV\Settings::get('enable_plugin_route')); ?>
                                 </select></div>
                             <div class="input-below"><?php _se("Enable this to display plugin instructions at %u. A link to these instructions will be added to the %s menu. This setting doesn't affect administrators.", [
-                                    '%u' => G_ROOT_PATH_RELATIVE . 'plugin',
-                                    '%s' => '“' . _s('About') . '”',
-                                ]); ?></div>
+                                '%u' => G_ROOT_PATH_RELATIVE.'plugin',
+                                '%s' => '“'._s('About').'”',
+                            ]); ?></div>
                         </div>
                         <div class="input-label">
                             <label for="sdk_pup_url">PUP SDK URL</label>
@@ -3607,7 +3606,7 @@ function read_the_docs($args = [])
                                                               value="<?php echo CHV\Settings::get('sdk_pup_url', true); ?>"
                                                               placeholder="<?php _se('Empty'); ?>"></div>
                             <div class="input-below input-warning red-warning"><?php echo get_input_errors()['sdk_pup_url']; ?></div>
-                            <div class="input-below"><?php _se('Use this to set a custom URL for %p. Please note that you need to manually replicate %s in this URL.', ['%p' => 'PUP SDK', '%s' => G_ROOT_PATH_RELATIVE . 'sdk/pup.js']); ?></div>
+                            <div class="input-below"><?php _se('Use this to set a custom URL for %p. Please note that you need to manually replicate %s in this URL.', ['%p' => 'PUP SDK', '%s' => G_ROOT_PATH_RELATIVE.'sdk/pup.js']); ?></div>
                         </div>
 
                     <hr class="line-separator">
@@ -3651,7 +3650,7 @@ function read_the_docs($args = [])
             function personal_mode_warning()
             {
                 if (CHV\getSetting('website_mode') == 'personal') {
-                    echo '<div class="input-below"><span class="icon icon-info color-red"></span> ' . _s('This setting is always diabled when using personal website mode.') . '</div>';
+                    echo '<div class="input-below"><span class="icon icon-info color-red"></span> '._s('This setting is always diabled when using personal website mode.').'</div>';
                 }
             }
 
@@ -3678,8 +3677,8 @@ function read_the_docs($args = [])
                     </div>
                     <div id="censor-combo" class="c9 phablet-c1">
                         <div data-combo-value="1" class="switch-combo<?php if (!(get_safe_post() ? get_safe_post()['censor_type'] : CHV\Settings::get('censor_type'))) {
-                            echo ' soft-hidden';
-                        } ?>">
+                                    echo ' soft-hidden';
+                                } ?>">
                             <div class="baidu">
                                 <div class="input-label">
                                     <label for="bd_censor_app_id"><?php _se('BaiDu AI APPID'); ?></label>
@@ -3704,8 +3703,8 @@ function read_the_docs($args = [])
                         </div>
 
                         <div data-combo-value="2" class="switch-combo<?php if (!(get_safe_post() ? get_safe_post()['censor_type'] : CHV\Settings::get('censor_type'))) {
-                            echo ' soft-hidden';
-                        } ?>">
+                                    echo ' soft-hidden';
+                                } ?>">
                             <div class="tencent">
                                 <div class="input-label">
                                     <label for="tx_censor_app_id"><?php _se('Tencent AI APPID'); ?></label>
@@ -3724,8 +3723,8 @@ function read_the_docs($args = [])
                         </div>
 
                         <div data-combo-value="3" class="switch-combo<?php if (!(get_safe_post() ? get_safe_post()['censor_type'] : CHV\Settings::get('censor_type'))) {
-                            echo ' soft-hidden';
-                        } ?>">
+                                    echo ' soft-hidden';
+                                } ?>">
                             <div class="moderatecontent">
                                 <div class="input-label">
                                     <label for="tx_censor_app_key"><?php _se('Moderatecontent Key'); ?></label>
@@ -3739,8 +3738,8 @@ function read_the_docs($args = [])
 
 
                         <div data-combo-value="4" class="switch-combo<?php if (!(get_safe_post() ? get_safe_post()['censor_type'] : CHV\Settings::get('censor_type'))) {
-                            echo ' soft-hidden';
-                        } ?>">
+                                    echo ' soft-hidden';
+                                } ?>">
                             <div class="sightengine">
                                 <div class="input-label">
                                     <label for="se_censor_user"><?php _se('Sightengine User'); ?></label>
@@ -3804,13 +3803,13 @@ function read_the_docs($args = [])
     </div>
 
 <?php if (is_changed() || is_error()) {
-    ?>
+                ?>
     <script>
         $(function () {
             PF.fn.growl.expirable("<?php echo is_changed() ? (get_changed_message() ?: _s('Changes have been saved.')) : (get_error_message() ?: _s('Check the errors to proceed.')); ?>");
         });
     </script>
     <?php
-} ?>
+            } ?>
 
 <?php G\Render\include_theme_footer(); ?>

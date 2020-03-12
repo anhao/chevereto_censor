@@ -3,44 +3,46 @@
  * Created by PhpStorm.
  * User: Administrator
  * Date: 2020/3/10
- * Time: 19:45
+ * Time: 19:45.
  */
 
 namespace Alone88\ImageCensor\Tool;
-
 
 use Exception;
 
 class HttpUtil
 {
-
     /**
      * HttpUtil constructor.
+     *
      * @param array $headers
      */
-    public function __construct($headers = array())
+    public function __construct($headers = [])
     {
         $this->headers = $this->buildHeaders($headers);
         $this->connectTimeout = 60000;
         $this->socketTimeout = 60000;
-        $this->conf = array();
+        $this->conf = [];
     }
 
     /**
      * @param array $headers
+     *
      * @return array
      */
     public function buildHeaders(array $headers)
     {
-        $result = array();
+        $result = [];
         foreach ($headers as $k => $v) {
             $result[] = sprintf('%s:%s', $k, $v);
         }
+
         return $result;
     }
 
     /**
-     * 连接超时
+     * 连接超时.
+     *
      * @param int $ms 毫秒
      */
     public function setConnectionTimeoutInMillis($ms)
@@ -49,7 +51,8 @@ class HttpUtil
     }
 
     /**
-     * 响应超时
+     * 响应超时.
+     *
      * @param int $ms 毫秒
      */
     public function setSocketTimeoutInMillis($ms)
@@ -58,7 +61,8 @@ class HttpUtil
     }
 
     /**
-     * 配置
+     * 配置.
+     *
      * @param array $conf
      */
     public function setConf($conf)
@@ -67,14 +71,16 @@ class HttpUtil
     }
 
     /**
-     * @param  string $url
-     * @param  array $data HTTP POST BODY
-     * @param  array $param HTTP URL
-     * @param  array $headers HTTP header
-     * @return array
+     * @param string $url
+     * @param array  $data    HTTP POST BODY
+     * @param array  $param   HTTP URL
+     * @param array  $headers HTTP header
+     *
      * @throws Exception
+     *
+     * @return array
      */
-    public function post($url, $data = array(), $params = array(), $headers = array())
+    public function post($url, $data = [], $params = [], $headers = [])
     {
         $url = $this->buildUrl($url, $params);
         $headers = array_merge($this->headers, $this->buildHeaders($headers));
@@ -98,30 +104,33 @@ class HttpUtil
         }
 
         curl_close($ch);
-        return array(
-            'code' => $code,
+
+        return [
+            'code'    => $code,
             'content' => $content,
-        );
+        ];
     }
 
     /**
+     * @param string $url
+     * @param array  $params 参数
      *
-     * @param  string $url
-     * @param  array $params 参数
      * @return string
      */
     private function buildUrl($url, $params)
     {
         if (!empty($params)) {
             $str = http_build_query($params);
-            return $url . (strpos($url, '?') === false ? '?' : '&') . $str;
+
+            return $url.(strpos($url, '?') === false ? '?' : '&').$str;
         } else {
             return $url;
         }
     }
 
     /**
-     * 请求预处理
+     * 请求预处理.
+     *
      * @param resource $ch
      */
     public function prepare($ch)
@@ -141,9 +150,9 @@ class HttpUtil
         $data = [];
         if ($key) {
             if (class_exists('\CURLFile')) {
-                $data = array($key => new \CURLFile(realpath($params[$key])));
+                $data = [$key => new \CURLFile(realpath($params[$key]))];
             } else {
-                $data = array($key => '@' . realpath($params[$key]));
+                $data = [$key => '@'.realpath($params[$key])];
             }
         }
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -163,26 +172,28 @@ class HttpUtil
         }
 
         curl_close($ch);
-        return array(
-            'code' => $code,
+
+        return [
+            'code'    => $code,
             'content' => $content,
-        );
+        ];
     }
 
     /**
-     * @param  string $url
-     * @param  array $datas HTTP POST BODY
-     * @param  array $param HTTP URL
-     * @param  array $headers HTTP header
+     * @param string $url
+     * @param array  $datas   HTTP POST BODY
+     * @param array  $param   HTTP URL
+     * @param array  $headers HTTP header
+     *
      * @return array
      */
-    public function multi_post($url, $datas = array(), $params = array(), $headers = array())
+    public function multi_post($url, $datas = [], $params = [], $headers = [])
     {
         $url = $this->buildUrl($url, $params);
         $headers = array_merge($this->headers, $this->buildHeaders($headers));
 
-        $chs = array();
-        $result = array();
+        $chs = [];
+        $result = [];
         $mh = curl_multi_init();
         foreach ($datas as $data) {
             $ch = curl_init();
@@ -209,10 +220,10 @@ class HttpUtil
         foreach ($chs as $ch) {
             $content = curl_multi_getcontent($ch);
             $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-            $result[] = array(
-                'code' => $code,
+            $result[] = [
+                'code'    => $code,
                 'content' => $content,
-            );
+            ];
             curl_multi_remove_handle($mh, $ch);
         }
         curl_multi_close($mh);
@@ -221,12 +232,13 @@ class HttpUtil
     }
 
     /**
-     * @param  string $url
-     * @param  array $param HTTP URL
-     * @param  array $headers HTTP header
+     * @param string $url
+     * @param array  $param   HTTP URL
+     * @param array  $headers HTTP header
+     *
      * @return array
      */
-    public function get($url, $params = array(), $headers = array())
+    public function get($url, $params = [], $headers = [])
     {
         $url = $this->buildUrl($url, $params);
         $headers = array_merge($this->headers, $this->buildHeaders($headers));
@@ -248,11 +260,10 @@ class HttpUtil
         }
 
         curl_close($ch);
-        return array(
-            'code' => $code,
+
+        return [
+            'code'    => $code,
             'content' => $content,
-        );
+        ];
     }
-
-
 }

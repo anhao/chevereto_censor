@@ -3,11 +3,10 @@
  * Created by PhpStorm.
  * User: Administrator
  * Date: 2020/3/10
- * Time: 19:39
+ * Time: 19:39.
  */
 
 namespace Alone88\ImageCensor\Tencent;
-
 
 use Alone88\ImageCensor\Tool\HttpUtil;
 
@@ -27,8 +26,10 @@ class AipBase
      * @param $url
      * @param $data
      * @param array $headers
-     * @return mixed
+     *
      * @throws \Exception
+     *
+     * @return mixed
      */
     public function request($url, $data, $headers = [])
     {
@@ -49,7 +50,7 @@ class AipBase
         return md5(uniqid(microtime(true), true));
     }
 
-    /** 获得 sign
+    /** 获得 sign.
      * @param $params
      * @param $key
      */
@@ -59,20 +60,23 @@ class AipBase
         $str = '';
         foreach ($params as $key => $value) {
             if ($value !== '') {
-                $str .= $key . '=' . urlencode($value) . '&';
+                $str .= $key.'='.urlencode($value).'&';
             }
         }
         // 3. 拼接app_key
-        $str .= 'app_key=' . $appkey;
+        $str .= 'app_key='.$appkey;
 
         // 4. MD5运算+转换大写，得到请求签名
         $sign = strtoupper(md5($str));
+
         return $sign;
     }
 
     /**
-     * 格式化结果
+     * 格式化结果.
+     *
      * @param $content string
+     *
      * @return mixed
      */
     protected function proccessResult($content)

@@ -3,11 +3,10 @@
  * Created by PhpStorm.
  * User: Administrator
  * Date: 2020/3/10
- * Time: 19:32
+ * Time: 19:32.
  */
 
 namespace Alone88\ImageCensor\Baidu;
-
 
 class BDImageCensor extends AipBase
 {
@@ -16,7 +15,7 @@ class BDImageCensor extends AipBase
      */
     private $imageCensorUserDefinedUrl = 'https://aip.baidubce.com/rest/2.0/solution/v1/img_censor/v2/user_defined';
 
-    /** 图片鉴黄
+    /** 图片鉴黄.
      *
      * @var string
      *
@@ -24,8 +23,7 @@ class BDImageCensor extends AipBase
      */
     public function imageCensor($image)
     {
-
-        $data = array();
+        $data = [];
 
         $isUrl = substr(trim($image), 0, 4) === 'http';
         if (!$isUrl) {
@@ -39,8 +37,11 @@ class BDImageCensor extends AipBase
         } catch (\Exception $e) {
             return 4;
         }
-        if (isset($data['error_code'])) return 4;
+        if (isset($data['error_code'])) {
+            return 4;
+        }
         $conclusionType = $data['conclusionType'];
+
         return $conclusionType;
     }
 }
