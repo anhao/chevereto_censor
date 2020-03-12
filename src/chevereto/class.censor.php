@@ -65,7 +65,7 @@ class Censor
         if ($type == 'url') {
             $res = (new Censor)->urlCensor($source);
         } else {
-            $res = (new Censor)->imageCensor(file_get_contents($source['tmp_name']));
+            $res = (new Censor)->imageCensor($source['tmp_name']);
         }
         if ($res == 2) {
             self::pronMode();
