@@ -3,16 +3,16 @@
  * Created by PhpStorm.
  * User: Administrator
  * Date: 2020/3/10
- * Time: 22:31
+ * Time: 22:31.
  */
 
 namespace Alone88\ImageCensor\Sightengine;
 
-
 class SEImageCensor extends SightengineClient
 {
-    /** image censor
+    /** image censor.
      * @param $image
+     *
      * @return int 1 正常，2 色情，3 疑似，4 失败
      */
     public function imageCensor($image)
@@ -27,17 +27,21 @@ class SEImageCensor extends SightengineClient
         } catch (\Exception $e) {
             return 4;
         }
+
         return $this->getCensorLevel($data);
     }
 
-    /** get image censor level
+    /** get image censor level.
      * @param $data
+     *
      * @return int
      */
     private function getCensorLevel($data)
     {
         $status = $data['status'];
-        if ($status != 'success') return 4;
+        if ($status != 'success') {
+            return 4;
+        }
         $nudity = $data['nudity'];
         $raw = $nudity['raw'];
         $safe = $nudity['safe'];
@@ -48,6 +52,7 @@ class SEImageCensor extends SightengineClient
         if ($partial > max($safe, $raw)) {
             return 3;
         }
+
         return 1;
     }
 }

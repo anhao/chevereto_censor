@@ -24,9 +24,9 @@ $route = function ($handler) {
 
         $logged_user = CHV\Login::getUser();
         $logged_user_source_db = [
-            'user_name' => $logged_user['name'],
+            'user_name'     => $logged_user['name'],
             'user_username' => $logged_user['username'],
-            'user_email' => $logged_user['email'],
+            'user_email'    => $logged_user['email'],
         ];
 
         $doing = $_REQUEST['action'];
@@ -88,14 +88,14 @@ $route = function ($handler) {
                     CHV\Akismet::checkImage($_REQUEST['title'], $_REQUEST['description'], $logged_user_source_db);
                 }
                 // add image censor
-                if (CHV\getSetting("censor_type") != 0) {
+                if (CHV\getSetting('censor_type') != 0) {
                     \CHV\Censor::censor($source, $type);
                 }
 
                 // Upload to website
                 $uploaded_id = CHV\Image::uploadToWebsite($source, $logged_user, $_REQUEST);
                 $json_array['status_code'] = 200;
-                $json_array['success'] = array('message' => 'image uploaded', 'code' => 200);
+                $json_array['success'] = ['message' => 'image uploaded', 'code' => 200];
                 $json_array['image'] = CHV\Image::formatArray(CHV\Image::getSingle($uploaded_id, 0, 0), 1);
                 break;
 
@@ -114,7 +114,7 @@ $route = function ($handler) {
                     $list_request = $_REQUEST['list'];
                 }
 
-                if (!in_array($list_request, array('images', 'albums', 'users'))) {
+                if (!in_array($list_request, ['images', 'albums', 'users'])) {
                     throw new Exception('Invalid list request', 100);
                 }
 
@@ -137,7 +137,7 @@ $route = function ($handler) {
                         $where = '';
 
                         if (!empty($_REQUEST['like_user_id'])) {
-                            $where .= ($where == '' ? 'WHERE' : ' AND') . ' like_user_id=:image_user_id';
+                            $where .= ($where == '' ? 'WHERE' : ' AND').' like_user_id=:image_user_id';
                             $binds[] = [
                                 'param' => ':image_user_id',
                                 'value' => CHV\decodeID($_REQUEST['like_user_id']),
@@ -145,7 +145,7 @@ $route = function ($handler) {
                         }
 
                         if (!empty($_REQUEST['follow_user_id'])) {
-                            $where .= ($where == '' ? 'WHERE' : ' AND') . ' follow_user_id=:image_user_id';
+                            $where .= ($where == '' ? 'WHERE' : ' AND').' follow_user_id=:image_user_id';
                             $binds[] = [
                                 'param' => ':image_user_id',
                                 'value' => CHV\decodeID($_REQUEST['follow_user_id']),
@@ -154,7 +154,7 @@ $route = function ($handler) {
 
                         if (!empty($_REQUEST['userid'])) {
                             $owner_id = CHV\decodeID($_REQUEST['userid']);
-                            $where .= ($where == '' ? 'WHERE' : ' AND') . ' image_user_id=:image_user_id';
+                            $where .= ($where == '' ? 'WHERE' : ' AND').' image_user_id=:image_user_id';
                             $binds[] = [
                                 'param' => ':image_user_id',
                                 'value' => $owner_id,
@@ -163,11 +163,11 @@ $route = function ($handler) {
 
                         if (!empty($_REQUEST['albumid'])) {
                             $album_id = CHV\decodeID($_REQUEST['albumid']);
-                            $where .= ($where == '' ? 'WHERE' : ' AND') . ' image_album_id=:image_album_id';
-                            $binds[] = array(
+                            $where .= ($where == '' ? 'WHERE' : ' AND').' image_album_id=:image_album_id';
+                            $binds[] = [
                                 'param' => ':image_album_id',
                                 'value' => $album_id,
-                            );
+                            ];
                             $album = CHV\Album::getSingle($album_id);
                             if ($album['user']['id']) {
                                 $owner_id = $album['user']['id'];
@@ -194,16 +194,16 @@ $route = function ($handler) {
 
                     case 'albums':
 
-                        $binds = array();
+                        $binds = [];
                         $where = '';
 
                         if (!empty($_REQUEST['userid'])) {
                             $owner_id = CHV\decodeID($_REQUEST['userid']);
-                            $where .= ($where == '' ? 'WHERE' : ' AND') . ' album_user_id=:album_user_id';
-                            $binds[] = array(
+                            $where .= ($where == '' ? 'WHERE' : ' AND').' album_user_id=:album_user_id';
+                            $binds[] = [
                                 'param' => ':album_user_id',
                                 'value' => $owner_id,
-                            );
+                            ];
                         }
 
                         switch ($_REQUEST['from']) {
@@ -222,7 +222,7 @@ $route = function ($handler) {
                         if (CHV\getSetting('enable_followers') and (!empty($_REQUEST['following_user_id']) or !empty($_REQUEST['followers_user_id']))) {
                             $doing = !empty($_REQUEST['following_user_id']) ? 'following' : 'followers';
                             $user_id = CHV\decodeID($doing == 'following' ? $_REQUEST['following_user_id'] : $_REQUEST['followers_user_id']);
-                            $where = 'WHERE follow' . ($doing == 'following' ? null : '_followed') . '_user_id=:user_id';
+                            $where = 'WHERE follow'.($doing == 'following' ? null : '_followed').'_user_id=:user_id';
                             $binds[] = [
                                 'param' => ':user_id',
                                 'value' => $user_id,
@@ -245,7 +245,7 @@ $route = function ($handler) {
                     }
 
                     $where .= $where == '' ? $search->wheres : preg_replace('/WHERE /', ' AND ', $search->wheres, 1);
-                    $binds = array_merge((array)$binds, $search->binds);
+                    $binds = array_merge((array) $binds, $search->binds);
                 }
 
                 $list_params = CHV\Listing::getParams(true);
@@ -258,10 +258,10 @@ $route = function ($handler) {
                     $album_fetch = min(1000, $album['image_count']);
                     $list_params = [
                         'items_per_page' => $album_fetch,
-                        'page' => 0,
-                        'limit' => $album_fetch,
-                        'offset' => 0,
-                        'sort' => ['date', 'desc'],
+                        'page'           => 0,
+                        'limit'          => $album_fetch,
+                        'offset'         => 0,
+                        'sort'           => ['date', 'desc'],
                     ];
                 }
 
@@ -283,7 +283,7 @@ $route = function ($handler) {
                     if (is_array($home_uid_arr)) {
                         $home_uid_bind = [];
                         foreach ($home_uid_arr as $k => $v) {
-                            $home_uid_bind[] = ':user_id_' . $k;
+                            $home_uid_bind[] = ':user_id_'.$k;
                             if ($v == 0) {
                                 $home_uid_is_null = true;
                             }
@@ -292,13 +292,13 @@ $route = function ($handler) {
                     }
                     if (is_array($home_uid_arr)) {
                         $prefix = CHV\DB::getFieldPrefix($list_request);
-                        $where = 'WHERE ' . $prefix . '_user_id IN(' . $home_uid_bind . ')';
+                        $where = 'WHERE '.$prefix.'_user_id IN('.$home_uid_bind.')';
                         if ($home_uid_is_null) {
-                            $where .= ' OR ' . $prefix . '_user_id IS NULL';
+                            $where .= ' OR '.$prefix.'_user_id IS NULL';
                         }
                         // $list->setWhere($where);
                         foreach ($home_uid_arr as $k => $v) {
-                            $list->bind(':user_id_' . $k, $v);
+                            $list->bind(':user_id_'.$k, $v);
                         }
                     }
                 }
@@ -369,11 +369,11 @@ $route = function ($handler) {
                 $editing['new_album'] = $editing['new_album'] == 'true';
 
                 $allowed_to_edit = [
-                    'image' => ['name', 'category_id', 'title', 'description', 'album_id', 'nsfw'],
-                    'album' => ['name', 'privacy', 'album_id', 'description', 'password'],
+                    'image'    => ['name', 'category_id', 'title', 'description', 'album_id', 'nsfw'],
+                    'album'    => ['name', 'privacy', 'album_id', 'description', 'password'],
                     'category' => ['name', 'description', 'url_key'],
-                    'storage' => ['name', 'bucket', 'region', 'url', 'server', 'capacity', 'is_https', 'is_active', 'api_id', 'key', 'secret', 'account_id', 'account_name'],
-                    'ip_ban' => ['ip', 'expires', 'message'],
+                    'storage'  => ['name', 'bucket', 'region', 'url', 'server', 'capacity', 'is_https', 'is_active', 'api_id', 'key', 'secret', 'account_id', 'account_name'],
+                    'ip_ban'   => ['ip', 'expires', 'message'],
                 ];
                 $allowed_to_edit['images'] = $allowed_to_edit['image'];
                 $allowed_to_edit['albums'] = $allowed_to_edit['album'];
@@ -464,11 +464,11 @@ $route = function ($handler) {
                             $html = ob_get_contents();
                             ob_end_clean();
 
-                            $json_array['image']['album']['slice'] = array(
+                            $json_array['image']['album']['slice'] = [
                                 'next' => $image_album_slice['next']['url_viewer'],
                                 'prev' => $image_album_slice['prev']['url_viewer'],
                                 'html' => $html,
-                            );
+                            ];
                         } else {
                             $json_array['image']['album']['slice'] = null;
                         }
@@ -569,7 +569,7 @@ $route = function ($handler) {
                         }
 
                         $category = CHV\DB::get('categories', ['id' => $id])[0];
-                        $category['category_url'] = G\get_base_url('category/' . $category['category_url_key']);
+                        $category['category_url'] = G\get_base_url('category/'.$category['category_url_key']);
                         $category = CHV\DB::formatRow($category);
 
                         $json_array['status_code'] = 200;
@@ -614,12 +614,12 @@ $route = function ($handler) {
                             }
 
                             $json_array['status_code'] = 200;
-                            $json_array['success'] = array('message' => 'IP ban edited', 'code' => 200);
+                            $json_array['success'] = ['message' => 'IP ban edited', 'code' => 200];
                             $json_array['ip_ban'] = CHV\Ip_ban::getSingle(['id' => $id]);
                         } catch (Exception $e) {
                             $json_array = [
                                 'status_code' => 403,
-                                'error' => ['message' => $e->getMessage(), $e->getCode()],
+                                'error'       => ['message' => $e->getMessage(), $e->getCode()],
                             ];
                             break;
                         }
@@ -633,12 +633,13 @@ $route = function ($handler) {
                         }
 
                         $id = $_REQUEST['editing']['id'];
+
                         try {
                             $storage_update = CHV\Storage::update($id, $editing);
                         } catch (Exception $e) {
                             $json_array = [
                                 'status_code' => 403,
-                                'error' => ['message' => $e->getMessage(), 403],
+                                'error'       => ['message' => $e->getMessage(), 403],
                             ];
                             break;
                         }
@@ -680,7 +681,7 @@ $route = function ($handler) {
                 }
 
                 // Validate password
-                if (!preg_match('/' . CHV\getSetting('user_password_pattern') . '/', $user['password'])) {
+                if (!preg_match('/'.CHV\getSetting('user_password_pattern').'/', $user['password'])) {
                     throw new Exception(_s('Invalid password'), 103);
                 }
 
@@ -712,9 +713,9 @@ $route = function ($handler) {
                 }
 
                 $add_user = CHV\User::insert([
-                    'username' => $user['username'],
-                    'email' => $user['email'],
-                    'is_admin' => $is_admin,
+                    'username'   => $user['username'],
+                    'email'      => $user['email'],
+                    'is_admin'   => $is_admin,
                     'is_manager' => $is_manager,
                 ]);
 
@@ -768,7 +769,7 @@ $route = function ($handler) {
                 $add_category = CHV\DB::insert('categories', $category);
 
                 $category = CHV\DB::get('categories', ['id' => $add_category])[0];
-                $category['category_url'] = G\get_base_url('category/' . $category['category_url_key']);
+                $category['category_url'] = G\get_base_url('category/'.$category['category_url_key']);
                 $category = CHV\DB::formatRow($category);
 
                 $json_array['status_code'] = 200;
@@ -809,7 +810,7 @@ $route = function ($handler) {
                 } catch (Exception $e) {
                     $json_array = [
                         'status_code' => 403,
-                        'error' => ['message' => $e->getMessage(), $e->getCode()],
+                        'error'       => ['message' => $e->getMessage(), $e->getCode()],
                     ];
                     break;
                 }
@@ -833,7 +834,7 @@ $route = function ($handler) {
                 } catch (Exception $e) {
                     $json_array = [
                         'status_code' => 403,
-                        'error' => ['message' => $e->getMessage(), 'code' => 403],
+                        'error'       => ['message' => $e->getMessage(), 'code' => 403],
                     ];
                     break;
                 }
@@ -861,7 +862,7 @@ $route = function ($handler) {
                     throw new Exception('Invalid content owner request', 110);
                 }
 
-                $ids = array();
+                $ids = [];
                 foreach ($editing['ids'] as $id) {
                     $ids[] = CHV\decodeID($id);
                 }
@@ -897,7 +898,7 @@ $route = function ($handler) {
                 }
 
                 $db = CHV\DB::getInstance();
-                $db->query('UPDATE `' . CHV\DB::getTable('images') . '` SET `image_' . $query_field . '`=:prop WHERE `image_id` IN (' . implode(',', $images_ids) . ')');
+                $db->query('UPDATE `'.CHV\DB::getTable('images').'` SET `image_'.$query_field.'`=:prop WHERE `image_id` IN ('.implode(',', $images_ids).')');
                 $db->bind(':prop', $prop);
                 $db->exec();
 
@@ -915,8 +916,8 @@ $route = function ($handler) {
 
                 $type = $_REQUEST['type'];
 
-                if (!in_array($type, array('images', 'album', 'albums'))) {
-                    throw new Exception('Invalid album ' . ($doing == 'move' ? 'move' : 'create') . ' request', 100);
+                if (!in_array($type, ['images', 'album', 'albums'])) {
+                    throw new Exception('Invalid album '.($doing == 'move' ? 'move' : 'create').' request', 100);
                 }
 
                 $album = $_REQUEST['album'];
@@ -948,10 +949,10 @@ $route = function ($handler) {
 
                 if (is_array($album['ids'])) {
                     if (count($album['ids']) == 0) {
-                        throw new Exception('Invalid source album ids ' . ($doing == 'move' ? 'move' : 'create') . ' request', 100);
+                        throw new Exception('Invalid source album ids '.($doing == 'move' ? 'move' : 'create').' request', 100);
                     }
                     if (count($album['ids']) > 0) {
-                        $ids = array();
+                        $ids = [];
                         foreach ($album['ids'] as $id) {
                             $ids[] = CHV\decodeID($id);
                         }
@@ -983,7 +984,7 @@ $route = function ($handler) {
                         $album_move = true;
 
                         $albums = CHV\Album::getMultiple($ids);
-                        $albums_ids = array();
+                        $albums_ids = [];
 
                         foreach ($albums as $album) {
                             if (!$handler::getCond('content_manager') && $album['album_user_id'] != $logged_user['id']) {
@@ -1105,7 +1106,7 @@ $route = function ($handler) {
                     throw new Exception('Invalid delete request', 100);
                 }
 
-                $db_field_prefix = in_array($type, array('image', 'images')) ? 'image' : 'album';
+                $db_field_prefix = in_array($type, ['image', 'images']) ? 'image' : 'album';
 
                 switch ($type) {
                     case 'image':
@@ -1129,7 +1130,7 @@ $route = function ($handler) {
                     $content_db = $Class_fn::getSingle($id, false, false);
 
                     if ($content_db) {
-                        if (!$handler::getCond('content_manager') and $content_db[$db_field_prefix . '_user_id'] !== $logged_user['id']) {
+                        if (!$handler::getCond('content_manager') and $content_db[$db_field_prefix.'_user_id'] !== $logged_user['id']) {
                             throw new Exception('Invalid content owner request', 114);
                         }
                         $delete = $Class_fn::delete($id);
@@ -1140,11 +1141,11 @@ $route = function ($handler) {
                     $affected = $delete;
                 } else {
                     if (!is_array($deleting['ids'])) {
-                        throw new Exception('Expecting ids array values, ' . gettype($deleting['ids']) . ' given', 100);
+                        throw new Exception('Expecting ids array values, '.gettype($deleting['ids']).' given', 100);
                     }
 
                     if (count($deleting['ids']) > 0) {
-                        $ids = array();
+                        $ids = [];
                         foreach ($deleting['ids'] as $id) {
                             $ids[] = CHV\decodeID($id);
                         }
@@ -1154,10 +1155,10 @@ $route = function ($handler) {
                     $owned_ids = [];
 
                     foreach ($contents_db as $content_db) {
-                        if (!$handler::getCond('content_manager') and $content_db[$db_field_prefix . '_user_id'] != $logged_user['id']) {
+                        if (!$handler::getCond('content_manager') and $content_db[$db_field_prefix.'_user_id'] != $logged_user['id']) {
                             continue;
                         }
-                        $owned_ids[] = $content_db[$db_field_prefix . '_id'];
+                        $owned_ids[] = $content_db[$db_field_prefix.'_id'];
                     }
 
                     if (!$owned_ids) {
@@ -1170,8 +1171,8 @@ $route = function ($handler) {
                 }
 
                 $json_array['success'] = [
-                    'message' => ucfirst($type) . ' deleted',
-                    'code' => 200,
+                    'message'  => ucfirst($type).' deleted',
+                    'code'     => 200,
                     'affected' => $affected,
                 ];
 
@@ -1214,7 +1215,7 @@ $route = function ($handler) {
                 $user_social_conn = 0;
                 foreach (CHV\Login::getSocialServices(['flat' => true]) as $k) {
                     if (array_key_exists($k, $user['login'])) {
-                        ++$user_social_conn;
+                        $user_social_conn++;
                     }
                 }
 
@@ -1227,11 +1228,11 @@ $route = function ($handler) {
 
                 // Do the thing
                 $delete_connection = CHV\Login::delete(['type' => $disconnect, 'user_id' => $user['id']]);
-                $delete_cookies = CHV\Login::delete(['type' => 'cookie_' . $disconnect, 'user_id' => $user['id']]);
+                $delete_cookies = CHV\Login::delete(['type' => 'cookie_'.$disconnect, 'user_id' => $user['id']]);
 
                 if ($delete_connection) {
                     if (in_array($disconnect, ['twitter', 'facebook'])) {
-                        CHV\User::update($user['id'], [$disconnect . '_username' => null]);
+                        CHV\User::update($user['id'], [$disconnect.'_username' => null]);
                     }
                     $json_array['success'] = ['message' => _s('%s has been disconnected.', $disconnect_label), 'code' => 200];
                 } else {
@@ -1248,10 +1249,10 @@ $route = function ($handler) {
                 if (!filter_var($_REQUEST['email'], FILTER_VALIDATE_EMAIL)) {
                     throw new Exception(_s('Invalid email'), 100);
                 }
-                CHV\send_mail($_REQUEST['email'], _s('Test email from %s @ %t', ['%s' => CHV\getSetting('website_name'), '%t' => G\datetime()]), '<p>' . _s('This is just a test') . '</p>');
+                CHV\send_mail($_REQUEST['email'], _s('Test email from %s @ %t', ['%s' => CHV\getSetting('website_name'), '%t' => G\datetime()]), '<p>'._s('This is just a test').'</p>');
                 $json_array['success'] = [
                     'message' => _s('Test email sent to %s.', $_REQUEST['email']),
-                    'code' => 200,
+                    'code'    => 200,
                 ];
                 break;
 
@@ -1265,12 +1266,12 @@ $route = function ($handler) {
                 }
                 $thing = str_replace('Id', null, $doing);
                 $id = $_REQUEST['id'];
-                $fn = 'CHV\\' . $thing . 'ID';
+                $fn = 'CHV\\'.$thing.'ID';
                 $res = $fn($id);
                 $json_array['success'] = [
-                    'message' => $id . ' == ' . $res,
-                    'code' => 200,
-                    $thing => $res,
+                    'message' => $id.' == '.$res,
+                    'code'    => 200,
+                    $thing    => $res,
                 ];
                 break;
 
@@ -1289,17 +1290,17 @@ $route = function ($handler) {
                 $user = CHV\DB::formatRow($user);
                 if ($_REQUEST['download'] == 0) {
                     $json_array['success'] = [
-                        'message' => _s('Downloading %s data', "'" . $user['username'] . "'"),
-                        'code' => 200,
-                        'redirURL' => G\get_current_url() . '&action=exportUser&download=1',
+                        'message'  => _s('Downloading %s data', "'".$user['username']."'"),
+                        'code'     => 200,
+                        'redirURL' => G\get_current_url().'&action=exportUser&download=1',
                     ];
                 } else {
-                    $filename = $user['username'] . '.json';
+                    $filename = $user['username'].'.json';
                     $user = G\array_filter_array($user, ['name', 'username', 'email', 'facebook_username', 'twitter_username', 'website', 'bio', 'timezone', 'language', 'is_private', 'newsletter_subscribe']);
                     $user = json_encode($user, JSON_PRETTY_PRINT);
                     header('Content-type: application/json');
-                    header('Content-Disposition: attachment; filename=' . $filename);
-                    header('Last-Modified: ' . G\datetimegmt('D, d M Y H:i:s') . ' UTC');
+                    header('Content-Disposition: attachment; filename='.$filename);
+                    header('Last-Modified: '.G\datetimegmt('D, d M Y H:i:s').' UTC');
                     header('Cache-Control: must-revalidate, pre-check=0, post-check=0, max-age=0');
                     header('Pragma: anytextexeptno-cache', true);
                     header('Cache-control: private', false);
@@ -1315,7 +1316,7 @@ $route = function ($handler) {
                     throw new Exception('Invalid request', 403);
                 }
                 $follow_array = [
-                    'user_id' => $logged_user['id'],
+                    'user_id'          => $logged_user['id'],
                     'followed_user_id' => CHV\decodeID($_REQUEST[$doing]['id']),
                 ];
                 $return = $doing == 'follow' ? CHV\Follow::insert($follow_array) : CHV\Follow::delete($follow_array);
@@ -1323,7 +1324,7 @@ $route = function ($handler) {
                     unset($return['id']);
                     $json_array['success'] = [
                         'message' => $doing == 'follow' ? _s('User %s followed', $return['username']) : _s('User %s unfollowed', $return['username']),
-                        'code' => 200,
+                        'code'    => 200,
                     ];
                     $json_array['user_followed'] = $return;
                 }
@@ -1335,8 +1336,8 @@ $route = function ($handler) {
                     throw new Exception('Invalid request', 403);
                 }
                 $like_array = [
-                    'user_id' => $logged_user['id'],
-                    'content_id' => CHV\decodeID($_REQUEST[$doing]['id']),
+                    'user_id'      => $logged_user['id'],
+                    'content_id'   => CHV\decodeID($_REQUEST[$doing]['id']),
                     'content_type' => $_REQUEST[$doing]['object'],
                 ];
                 $return = $doing == 'like' ? CHV\Like::insert($like_array) : CHV\Like::delete($like_array);
@@ -1345,7 +1346,7 @@ $route = function ($handler) {
                     unset($return['id']);
                     $json_array['success'] = [
                         'message' => $doing == 'like' ? _s('Content liked', $return['content']['id_encoded']) : _s('Content disliked', $return['content']['id_encoded']),
-                        'code' => 200,
+                        'code'    => 200,
                     ];
                     $json_array['content'] = $return;
                 }
@@ -1358,7 +1359,7 @@ $route = function ($handler) {
                 $res = CHV\Storage::regenStorageStats($_REQUEST['storageId']);
                 $json_array['success'] = [
                     'message' => $res,
-                    'code' => 200,
+                    'code'    => 200,
                 ];
                 break;
 
@@ -1369,7 +1370,7 @@ $route = function ($handler) {
                 $res = CHV\Storage::migrateStorage($_REQUEST['sourceStorageId'], $_REQUEST['targetStorageId']);
                 $json_array['success'] = [
                     'message' => $res,
-                    'code' => 200,
+                    'code'    => 200,
                 ];
                 break;
 
@@ -1400,7 +1401,7 @@ $route = function ($handler) {
                             case 'like':
                                 $message = _s('%u liked your %t %c', [
                                     '%t' => _s($content_type),
-                                    '%c' => '<a href="' . $v[$content_type]['url_viewer'] . '">' . $v[$content_type][($content_type == 'image' ? 'title' : 'name') . '_truncated_html'] . '</a>',
+                                    '%c' => '<a href="'.$v[$content_type]['url_viewer'].'">'.$v[$content_type][($content_type == 'image' ? 'title' : 'name').'_truncated_html'].'</a>',
                                 ]);
                                 break;
                             case 'follow':
@@ -1408,24 +1409,24 @@ $route = function ($handler) {
                                 break;
                         }
                         $v['message'] = strtr($message, [
-                            '%u' => $v['user']['is_private'] ? _s('A private user') : ('<a href="' . $v['user']['url'] . '">' . $v['user']['name_short_html'] . '</a>'),
+                            '%u' => $v['user']['is_private'] ? _s('A private user') : ('<a href="'.$v['user']['url'].'">'.$v['user']['name_short_html'].'</a>'),
                         ]);
                         if ($v['user']['is_private']) {
                             $avatar = $avatar_tpl[0];
                         } else {
                             $avatar = strtr($avatar_tpl[1], [
-                                '%user_url' => $v['user']['url'],
+                                '%user_url'    => $v['user']['url'],
                                 '%user_avatar' => strtr($avatar_src_tpl[isset($v['user']['avatar']) ? 1 : 0], [
-                                    '%user_avatar_url' => $v['user']['avatar']['url'],
+                                    '%user_avatar_url'      => $v['user']['avatar']['url'],
                                     '%user_name_short_html' => $v['user']['name_short_html'],
                                 ]),
                             ]);
                         }
                         $json_array['html'] .= strtr($template, [
-                            '%class' => !$v['is_read'] ? ' class="new"' : null,
-                            '%avatar' => $avatar,
-                            '%user_url' => $v['user']['url'],
-                            '%message' => $v['message'],
+                            '%class'        => !$v['is_read'] ? ' class="new"' : null,
+                            '%avatar'       => $avatar,
+                            '%user_url'     => $v['user']['url'],
+                            '%message'      => $v['message'],
                             '%how_long_ago' => CHV\time_elapsed_string($v['date_gmt']),
                         ]);
                     }
@@ -1457,7 +1458,7 @@ $route = function ($handler) {
                 if ($_REQUEST['id'] == false) {
                     throw new Exception('Missing id parameter', 100);
                 }
-                $import->id = (int)$_REQUEST['id'];
+                $import->id = (int) $_REQUEST['id'];
                 $import->get();
                 break;
             default: // EX X
@@ -1473,7 +1474,7 @@ $route = function ($handler) {
                     break;
                 // Issue/Resume import operation (id+thread)
                 case 'importProcess':
-                    $import->thread = (int)$_REQUEST['thread'] ?: 1;
+                    $import->thread = (int) $_REQUEST['thread'] ?: 1;
                     $import->process();
                     $json_array['status_code'] = 200;
                     break;

@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Administrator
  * Date: 2020/3/10
- * Time: 20:53
+ * Time: 20:53.
  */
 
 namespace Alone88\ImageCensor\Moderate;
@@ -12,8 +12,7 @@ use Alone88\ImageCensor\Tool\HttpUtil;
 
 /** moderatecontent 鉴黄
  * 申请地址 https://www.moderatecontent.com/
- * Class BDImageCensor
- * @package Alone88\BDImageCensor\Moderate
+ * Class BDImageCensor.
  */
 class MCImageCensor
 {
@@ -21,11 +20,11 @@ class MCImageCensor
      * @var appkey
      */
     protected $apikey;
-    private $imageCensorUrl = "https://www.moderatecontent.com/api/v2";
+    private $imageCensorUrl = 'https://www.moderatecontent.com/api/v2';
 
     public function __construct($apiKey = null)
     {
-        $this->apikey= $apiKey;
+        $this->apikey = $apiKey;
         $this->client = new HttpUtil();
     }
 
@@ -40,8 +39,11 @@ class MCImageCensor
         }
         $data = $this->request($this->imageCensorUrl, $data, $isUrl);
         $errcode = $data['error_code'];
-        if ($errcode != 0) return 4;
+        if ($errcode != 0) {
+            return 4;
+        }
         $rating_index = $data['rating_index'];
+
         return $rating_index == 3 ? 2 : 1;
     }
 
@@ -49,6 +51,7 @@ class MCImageCensor
      * @param $url
      * @param $data
      * @param array $headers
+     *
      * @throws \Exception
      */
     public function request($url, $data, $isUrl, $headers = [])
@@ -59,12 +62,15 @@ class MCImageCensor
         } else {
             $response = $this->client->post($url, $data, $headers);
         }
+
         return $this->proccessResult($response['content']);
     }
 
     /**
-     * 格式化结果
+     * 格式化结果.
+     *
      * @param $content string
+     *
      * @return mixed
      */
     protected function proccessResult($content)
@@ -87,5 +93,4 @@ class MCImageCensor
     {
         $this->apikey = $apikey;
     }
-
 }
